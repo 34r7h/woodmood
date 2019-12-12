@@ -1,6 +1,5 @@
 import Vue from 'vue'
 const state = () => ({
-    counter: 0,
     tours: {},
     excursions: {},
     transfers: {},

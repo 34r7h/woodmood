@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card flat>
         <v-card-title class="">
           About
         </v-card-title>

@@ -1,78 +1,39 @@
 <template>
-    <div>
-      <p v-for="item in featuredArray" :key="item.id">{{item.name}}</p>
-      <v-card>
-          <v-card-title class="">
-            Featured Tours
-          </v-card-title>
-          <v-card-text >
-            <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-            <p>
-              For more information on Vuetify, check out the <a
-                href="https://vuetifyjs.com"
-                target="_blank"
-              >
-                documentation
-              </a>.
-            </p>
-            <p>
-              If you have questions, please join the official <a
-                href="https://chat.vuetifyjs.com/"
-                target="_blank"
-                title="chat"
-              >
-                discord
-              </a>.
-            </p>
-            <p>
-              Find a bug? Report it on the github <a
-                href="https://github.com/vuetifyjs/vuetify/issues"
-                target="_blank"
-                title="contribute"
-              >
-                issue board
-              </a>.
-            </p>
-            <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-            <div class="text-xs-right">
-              <em><small>&mdash; John Leider</small></em>
-            </div>
-            <hr class="my-3">
-            <a
-              href="https://nuxtjs.org/"
-              target="_blank"
-            >
-              Nuxt Documentation
-            </a>
-            <br>
-            <a
-              href="https://github.com/nuxt/nuxt.js"
-              target="_blank"
-            >
-              Nuxt GitHub
-            </a>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              color="primary"
-              nuxt
-              to="/inspire"
-            >
-              Continue
-            </v-btn>
+  <div>
+    <v-card class="mb-3" v-for="(item, itemIndex) in featuredArray" :key="itemIndex">
+      <div class="d-flex flex-wrap" :class="itemIndex % 2 === 0 ? '' : 'flex-row-reverse'">
+        <v-img
+          class="flex-grow-1 flex-shrink-1"
+          style="max-height: 320px; max-width: 100%; width: 40%; min-height: 180px; min-width: 240px;"
+          :src="item.image"
+        ></v-img>
+        <div class="flex-grow-1 flex-shrink-1" style="min-width: 240px; max-width:100%; width: 60%">
+          <v-card-title>{{item.name}}</v-card-title>
+          <v-card-subtitle class="overline mb-4">
+            <span v-for="(season, seasonIndex) in item.season" :key="seasonIndex">{{season}} </span>
+          </v-card-subtitle>
+          <v-card-text>{{item.details.substring(0,200)}}...</v-card-text>
+          <v-card-actions class="d-flex justify-space-around">
+            <v-card-title>${{item.cost}}</v-card-title>
+            <router-link :to="'/offer/tour/' + item.id">
+              <v-btn>More Info</v-btn>
+            </router-link>
           </v-card-actions>
-        </v-card>
-    </div>
+        </div>
+      </div>
+    </v-card>
+  </div>
 </template>
 <script>
+import _ from "lodash";
 export default {
   computed: {
     featuredArray() {
-      return Object.values(this.$store.state.tours).filter((x)=>{
-        return x.featured
-      })
+      return _.orderBy(
+        Object.values(this.$store.state.tours).filter(x => x.featured),
+        "id", 
+      ).reverse();
     }
   }
-}
+};
 </script>

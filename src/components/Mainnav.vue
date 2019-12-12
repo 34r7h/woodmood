@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-toolbar class="d-flex">
-      <v-toolbar-items class="d-flex justify-space-around">
-        <v-btn text v-for="(item, itemKey) in menuItems" :key="itemKey">
+    <v-toolbar flat class="d-flex">
+      <v-toolbar-items class="d-flex flex-wrap justify-space-around">
+        <v-btn class="flex-grow-1" style="min-width:120px" text v-for="(item, itemKey) in menuItems" :key="itemKey">
             <router-link :to="item.link" >{{item.name}}
             </router-link>
         </v-btn>
