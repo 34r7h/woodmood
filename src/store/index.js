@@ -29,7 +29,7 @@ const actions = {
         const ref = this.$fireStore.collection('items').doc(payload.type)
         return ref.set(dataObj)
     },
-    get({commit, state}) {
+    get({commit, state}) { 
         ['tours', 'excursions', 'transfers', 'site'].map((type)=>{
             const ref = this.$fireStore.collection('items').doc(type)
             ref.get().then((data) => {
