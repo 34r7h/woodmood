@@ -93,7 +93,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in copy[selected]" :key="item.id">
+          <tr v-for="item in copy[selected]" :key="item.id" v-if="item != null">
             <td
               :style="`width: ${100/section.props.length}vw;`"
               v-for="(prop, propKey) in section.props"
@@ -140,6 +140,7 @@
                 @input="save = true"
                 v-model="item[prop.name]"
               ></v-switch>
+              <v-icon @click="remove(item.id, selected)" v-if="prop.type === 'delete'">mdi-delete</v-icon>
             </td>
           </tr>
         </tbody>
@@ -185,7 +186,9 @@ export default {
               multiple: true,
               options: ["spring", "summer", "fall", "winter"]
             },
-            { name: "featured", type: "switch" }
+            { name: "featured", type: "switch" },
+            { name: "remove", type: "delete" }
+            
           ]
         },
         {
@@ -201,7 +204,8 @@ export default {
               multiple: true,
               options: ["spring", "summer", "fall", "winter"]
             },
-            { name: "featured", type: "switch" }
+            { name: "featured", type: "switch" },
+            { name: "remove", type: "delete" }
           ]
         },
         {
@@ -217,7 +221,8 @@ export default {
               multiple: true,
               options: ["spring", "summer", "fall", "winter"]
             },
-            { name: "featured", type: "switch" }
+            { name: "featured", type: "switch" },
+            { name: "remove", type: "delete" }
           ]
         }
       ],
@@ -226,11 +231,22 @@ export default {
     };
   },
   methods: {
-    add() {
-      console.log(this.$fireAuth, this.$fireStore);
+    add(item) {
+      this.selected = item
+      let id = Date.now()
+      this.copy[this.selected][id] = {id}
+      this.selected = ''
+      this.selected = item
     },
     clone(obj) {
       return JSON.parse(JSON.stringify(obj));
+    },
+    remove(id, selected) {
+      console.log('delete', id, selected)
+      delete this.copy[this.selected][id]
+      this.$store.commit('setState', {type: selected, data: this.copy[this.selected]})
+      this.save = true
+      // return this.copy
     },
     saveConfirm() {
       this.saved = true;

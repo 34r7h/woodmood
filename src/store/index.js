@@ -21,13 +21,8 @@ const actions = {
     },
     update(state, payload) {
         console.log('update', payload.type, payload.data )
-        let dataObj = {}
-        payload.data.map((e) => {
-            console.log(e)
-            dataObj[e.id] = e
-        })
         const ref = this.$fireStore.collection('items').doc(payload.type)
-        return ref.set(dataObj)
+        return ref.set(payload.data)
     },
     get({commit, state}) { 
         ['tours', 'excursions', 'transfers', 'site'].map((type)=>{
