@@ -33,7 +33,6 @@
         </v-col>
       </v-row>
     </v-container>
-    {{$store.state[type][id]}}
   </div>
 </template>
 <script>
