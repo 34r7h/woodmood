@@ -25,7 +25,7 @@
     </v-app-bar>
     <v-content>
       <slider v-if="$route.name === 'index'" />
-      <mainnav class="d-none d-sm-flex" v-if="$route.name !== 'admin'" />
+      <mainnav style="width:100%;" class="d-none d-sm-flex" />
       <v-container>
         <nuxt />
       </v-container>
@@ -37,7 +37,7 @@
 
         </v-list-item>
       </v-list>
-      <mainnav/>
+      <mainnav style="width:100%;" sidebar="true" />
 
 
       <!-- <v-list>
@@ -96,6 +96,13 @@ export default {
 };
 </script>
 <style>
+.v-toolbar__content {width:100%;}
+.v-banner__text {
+  width: 100% !important;
+}
+.v-banner__wrapper {
+  padding: 8px !important;
+}
 a,
 router-link {
   text-decoration: none;
