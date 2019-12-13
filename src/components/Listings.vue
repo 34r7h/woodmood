@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid class="grey lighten-5">
+  <v-container v-if="$store.state[type]" fluid class="grey lighten-5">
     <div class="d-flex justify-space-between align-center">
       <h1>{{type.toUpperCase()}}</h1>
-      <v-btn class="d-flex d-sm-none">Filters</v-btn>
+      <v-btn class="d-flex d-sm-none" @click="overlay = !overlay">Filters</v-btn>
     </div>
     <v-row no-gutters>
       <v-col cols="12" sm="8">
@@ -14,25 +14,35 @@
               v-for="item in list"
               :key="item.id"
             >
-              <v-img class="d-flex align-end" height="100%" :src="item.image">
-                <v-card
-                  flat
-                  class="d-flex flex-wrap ma-2 px-2 flex-shrink-1 justify-space-between align-center"
-                >
-                  <h2>{{item.name}}</h2>
-                  <b>from ${{item.cost}}</b>
-                </v-card>
-              </v-img>
+              <router-link :to="'/offer/' + type + '/' + item.id">
+                  <v-img class="d-flex align-end" height="100%" :src="item.image">
+                    <v-card
+                      flat
+                      class="d-flex flex-wrap ma-2 px-2 flex-shrink-1 justify-space-between align-center"
+                    >
+                      <h2>{{item.name}}</h2>
+                      <b>from ${{item.cost}}</b>
+                    </v-card>
+                  </v-img>
+              </router-link>
             </v-card>
           </div>
         </div>
       </v-col>
-      <v-col cols="12" sm="4">
+      <v-col cols="12" sm="4" class="d-none d-sm-flex">
         <v-banner style="width: 100%;" sticky class="pa-2" outlined tile>
           <filters style="width: 100%" :type="type" />
         </v-banner>
       </v-col>
     </v-row>
+    <v-overlay :value="overlay">
+      <v-card light class="ma-2 pa-4">
+        <v-btn icon @click="overlay = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+        <filters style="width: 100%" :type="type" />
+      </v-card>
+    </v-overlay>
   </v-container>
 </template>
 
@@ -45,17 +55,18 @@ export default {
     list() {
       return _.orderBy(
         Object.values(this.$store.state[this.type]).filter((x, xKey) => {
-            
-            let toCheck = this.$store.state.filtered[this.type]            
-            return (
-                (JSON.stringify(x)).toLowerCase().indexOf(toCheck.search.toLowerCase()) > -1 
-                && 
-                (JSON.stringify(x.location)).toLowerCase().indexOf(toCheck.location.toLowerCase()) > -1
-                &&
-                (x.cost > toCheck.cost[0] && x.cost < toCheck.cost[1])
-                &&
-                (toCheck.seasons.length === 0 || toCheck.seasons.some(r => x.season.includes(r)))
-            )
+          let toCheck = this.$store.state.filtered[this.type];
+          return (
+            JSON.stringify(x)
+              .toLowerCase()
+              .indexOf(toCheck.search.toLowerCase()) > -1 &&
+            JSON.stringify(x.location)
+              .toLowerCase()
+              .indexOf(toCheck.location.toLowerCase()) > -1 &&
+            (x.cost > toCheck.cost[0] && x.cost < toCheck.cost[1]) &&
+            (toCheck.seasons.length === 0 ||
+              toCheck.seasons.some(r => x.season.includes(r)))
+          );
         }),
         this.sort
       ).reverse();
@@ -63,7 +74,8 @@ export default {
   },
   data() {
     return {
-      sort: "id"
+      sort: "id",
+      overlay: false
     };
   },
   props: ["type"]

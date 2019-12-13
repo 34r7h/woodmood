@@ -65,8 +65,8 @@ import Slider from "../components/Slider";
 export default {
   components: { Contact, Mainnav, Slider },
   created() {
-    this.$vuetify.theme.dark =
-      new Date().getHours() < 9 || new Date().getHours() > 21 ? true : false;
+    this.$vuetify.theme.dark = false
+    // this.$vuetify.theme.dark = new Date().getHours() < 9 || new Date().getHours() > 21 ? true : false;
     this.$store.dispatch("get", this.$store.state);
   },
   data() {
