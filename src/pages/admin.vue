@@ -8,6 +8,7 @@
       >{{section}}</v-tab>
       <v-spacer />
       <v-tab @click="selected = 'site'">site</v-tab>
+      <v-tab @click="selected = 'bookings'; $store.dispatch('getBookings')">bookings</v-tab>
       <v-tab v-if="save">
         <v-btn
           @click="$store.dispatch('update', {type: selected, data: copy[selected]}); save = false; saveConfirm()"
@@ -38,7 +39,20 @@
       </v-tab>
     </v-tabs>
     <v-card v-if="selected === 'site'">
-      <h5>Site stuff</h5>
+      <v-card-title>SiteStuff</v-card-title>
+    </v-card>
+
+    <v-card v-if="selected === 'bookings'">
+      <v-card-title>Bookings</v-card-title>
+      <v-card-text v-for="(booking, bookingKey) in $store.state.bookings" :key="bookingKey">
+        <span>{{booking.date}}</span> <b>{{booking.item.name}}</b>
+        <a class="px-2" :href="'mailto:' + booking.email">{{booking.email}}</a>
+        <div class="d-flex flex-wrap" >
+          <div class="px-1">People: {{booking.number}}</div>
+          <div class="px-1">Phone: {{booking.phone}}</div>
+          <span>[ID: {{bookingKey}}]</span>
+        </div>
+      </v-card-text>
     </v-card>
 
     <v-simple-table fixed-header v-for="(section, sectionKey) in sections" :key="sectionKey">

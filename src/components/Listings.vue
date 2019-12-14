@@ -37,8 +37,8 @@
     </v-row>
     <v-overlay :value="overlay">
       <v-card light class="ma-2 pa-4">
-        <v-btn icon @click="overlay = false">
-          <v-icon>mdi-close</v-icon>
+        <v-btn @click="overlay = false">
+          <v-icon>mdi-close</v-icon> Close
         </v-btn>
         <filters style="width: 100%" :type="type" />
       </v-card>

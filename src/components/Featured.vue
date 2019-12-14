@@ -3,7 +3,7 @@
     <div v-for="(feature, featureKey) in featuredObject" :key="featureKey">
       <h2>Featured {{featureKey}}</h2>
       <v-card :flat="Boolean(nodetails)" class="mb-3" v-for="(item, itemIndex) in feature" :key="itemIndex">
-        <div class="d-flex flex-wrap" :class="itemIndex % 2 === 0 ? '' : 'flex-row-reverse'">
+        <div class="d-flex flex-wrap" :class="!nodetails && itemIndex % 2 === 0 ? '' : 'flex-row-reverse'">
           <v-card-title v-if="nodetails">{{item.name}}</v-card-title>
           <v-img
             class="flex-grow-1 flex-shrink-1"
@@ -17,9 +17,9 @@
             </v-card-subtitle>
             <v-card-text v-if="!nodetails">{{item.details.substring(0,200)}}...</v-card-text>
             <v-card-actions class="d-flex justify-space-around" :class="nodetails ? 'mb-2 pa-0' : ''">
-              <v-card-title>${{item.cost}}</v-card-title>
+              <v-card-title>from ${{item.cost}}</v-card-title>
               <router-link :to="'/offer/'+ featureKey+ '/' + item.id">
-                <v-btn>More Info</v-btn>
+                <v-btn class="primary">More Info</v-btn>
               </router-link>
             </v-card-actions>
           </div>
