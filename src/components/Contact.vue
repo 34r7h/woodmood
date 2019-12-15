@@ -7,7 +7,7 @@
       <v-icon>mdi-instagram</v-icon>
     </v-btn>
     <span class="me-3">
-      <v-btn outlined>Contact</v-btn>
+      <router-link to="/contact"><v-btn outlined>Contact</v-btn></router-link>
     </span>
   </div>
 </template>

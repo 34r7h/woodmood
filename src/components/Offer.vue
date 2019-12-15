@@ -27,7 +27,8 @@
                 {{season}}
               </v-chip>
             </v-card-subtitle>
-            <v-card-text>{{$store.state[type][id].details}}</v-card-text>
+            
+            <v-card-text><vue-simple-markdown :source="$store.state[type][id].details"></vue-simple-markdown></v-card-text>
             <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Request Booking</v-btn>
           </v-card>
         </v-col>

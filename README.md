@@ -20,3 +20,11 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+
+## TODO
+* Slider
+* Russian Translation
+* SEO / SSR
+* Transfers
+* Admin Auth

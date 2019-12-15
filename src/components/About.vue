@@ -1,7 +1,7 @@
 <template>
     <v-card flat>
-        <v-card-title class="">
-          About
-        </v-card-title>
+        <v-card-text>
+          <vue-simple-markdown :source="$store.state.site.about"></vue-simple-markdown>
+        </v-card-text>
     </v-card>
 </template>
