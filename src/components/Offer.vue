@@ -8,7 +8,7 @@
         </div>
         <v-spacer />
         <v-card-actions class="d-flex flex-grow-1">
-          <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Request Booking</v-btn>
+          <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
         </v-card-actions>
       </v-card>
       <br />
@@ -27,9 +27,11 @@
                 {{season}}
               </v-chip>
             </v-card-subtitle>
-            
-            <v-card-text><vue-simple-markdown :source="$store.state[type][id].details"></vue-simple-markdown></v-card-text>
-            <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Request Booking</v-btn>
+
+            <v-card-text>
+              <vue-simple-markdown :source="$store.state[type][id].details"></vue-simple-markdown>
+            </v-card-text>
+            <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
           </v-card>
         </v-col>
         <v-col cols="12" sm="5" class="pa-1">
