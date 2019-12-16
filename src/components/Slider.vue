@@ -11,17 +11,16 @@
       :key="i"
     >
       <v-img hero
+      class="align-center text-center justify-center d-flex flex-column"
       @click="$router.push('/offer/tours/'+slide.id)"
       :aspect-ratio="16/9"
       :src="slide.image"
       alt
     >
-      <v-row align="center" justify="center">
-        <v-col class="text-center" cols="12">
+
           <h1 class="mb-4">{{slide.name}}</h1>
           <h4 class="subheading">From ${{slide.cost}}</h4>
-        </v-col>
-      </v-row>
+
     </v-img>
     </v-carousel-item>
   </v-carousel>
@@ -48,6 +47,7 @@ export default {
 
 <style scoped>
 [hero] {
+  text-shadow: 0 0 6px rgba(255,255,255,.9), 0px -1px 1px rgba(255,255,255,.9);
   width: 100%;
   height: 100%;
   object-fit: contain;
