@@ -11,7 +11,7 @@
       :key="i"
     >
       <v-img hero
-      class="align-center text-center justify-center d-flex flex-column"
+      class="text-center"
       @click="$router.push('/offer/tours/'+slide.id)"
       :aspect-ratio="16/9"
       :src="slide.image"
