@@ -9,21 +9,23 @@
         <div class outlined tile>
           <div class="d-flex flex-wrap">
             <v-card
+              :aspect-ratio="16/9"
+              :style="i === 0 ? 'min-width: 100%' : ''"
               class="ma-1 flex-shrink-1"
               style="min-height: 240px; min-width: 240px; flex: 1"
-              v-for="item in list"
-              :key="item.id"
+              v-for="(item, i) in list"
+              :key="i"
             >
               <router-link :to="'/offer/' + type + '/' + item.id">
-                  <v-img class="d-flex align-end" height="100%" :src="item.image">
-                    <v-card
-                      flat
-                      class="d-flex flex-wrap ma-2 px-2 flex-shrink-1 justify-space-between align-center"
-                    >
-                      <h2>{{item.name}}</h2>
-                      <b>from ${{item.cost}}</b>
-                    </v-card>
-                  </v-img>
+                <v-img :aspect-ratio="16/9" class="d-flex align-end" height="100%" :src="item.image">
+                  <v-card
+                    flat
+                    class="d-flex flex-wrap ma-2 px-2 flex-shrink-1 justify-space-between align-center"
+                  >
+                    <h2>{{item.name}}</h2>
+                    <b>from ${{item.cost}}</b>
+                  </v-card>
+                </v-img>
               </router-link>
             </v-card>
           </div>
@@ -38,7 +40,7 @@
     <v-overlay :value="overlay">
       <v-card light class="ma-2 pa-4">
         <v-btn @click="overlay = false">
-          <v-icon>mdi-close</v-icon> Close
+          <v-icon>mdi-close</v-icon>Close
         </v-btn>
         <filters style="width: 100%" :type="type" />
       </v-card>
