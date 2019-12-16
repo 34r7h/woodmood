@@ -14,7 +14,7 @@
       </v-btn>
     </v-app-bar>
     <v-content>
-      <mainnav style="width:100%;" class="d-none d-sm-flex" />
+      <mainnav  style="width:100%;" class="d-none d-sm-flex" />
       <nuxt />
     </v-content>
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>

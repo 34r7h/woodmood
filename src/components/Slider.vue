@@ -10,7 +10,8 @@
       v-for="(slide, i) in slides.tours"
       :key="i"
     >
-      <v-parallax hero
+      <v-img hero
+      @click="$router.push('/offer/tours/'+slide.id)"
       :aspect-ratio="16/9"
       :src="slide.image"
       alt
@@ -21,7 +22,7 @@
           <h4 class="subheading">From ${{slide.cost}}</h4>
         </v-col>
       </v-row>
-    </v-parallax>
+    </v-img>
     </v-carousel-item>
   </v-carousel>
     <!-- <img hero src="https://www.thenaturaladventure.com/wp-content/uploads/2018/05/svaneti.jpg" alt=""> -->
@@ -48,8 +49,8 @@ export default {
 <style scoped>
 [hero] {
   width: 100%;
-  height: 300px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
   background-size: cover;
 }
 </style>

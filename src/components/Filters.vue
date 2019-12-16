@@ -1,6 +1,7 @@
 <template>
   <div class="d-flex flex-column" style="width: 100%">
     <h2>Filters</h2>
+    <br>
     <v-btn @click="updateFilters()">Apply</v-btn>
     <v-form ref="form" v-model="valid">
       <v-text-field v-model="copy.search" label="Search text" single-line type="text"></v-text-field>

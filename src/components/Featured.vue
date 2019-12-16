@@ -53,9 +53,10 @@
 <script>
 import _ from "lodash";
 import Slider from "./Slider";
+import Mainnav from "./Mainnav";
 
 export default {
-  components: { Slider },
+  components: { Slider, Mainnav },
   computed: {
     featuredObject() {
       return {
