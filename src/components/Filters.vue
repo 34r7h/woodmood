@@ -1,8 +1,10 @@
 <template>
   <div class="d-flex flex-column" style="width: 100%">
     <h2>Filters</h2>
-    <br>
-    <v-btn @click="updateFilters()">Apply</v-btn>
+    <br />
+    <v-btn
+      @click="updateFilters(); $store.commit('setState', {type: 'overlays', data: {listings: false}})"
+    >Apply</v-btn>
     <v-form ref="form" v-model="valid">
       <v-text-field v-model="copy.search" label="Search text" single-line type="text"></v-text-field>
 
@@ -30,7 +32,7 @@
       </v-range-slider>
 
       <v-text-field v-model="copy.location" label="Location" single-line type="text"></v-text-field>
-
+      <v-text-field v-model="copy.type" label="Search type" single-line type="text"></v-text-field>
       <v-select
         v-model="copy.seasons"
         :items="['spring', 'summer', 'fall', 'winter' ]"
@@ -51,9 +53,9 @@
 <script>
 export default {
   computed: {
-      copy () {
-          return this.clone(this.$store.state.filtered[this.type])
-      }
+    copy() {
+      return this.clone(this.$store.state.filtered[this.type]);
+    }
   },
   props: ["type"],
   data() {
@@ -62,7 +64,8 @@ export default {
         location: "",
         cost: [0, 500],
         search: "",
-        seasons: []
+        seasons: [],
+        type: ""
       },
       valid: true
     };

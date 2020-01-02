@@ -6,7 +6,7 @@ const state = () => ({
         winter: 'snowflake',
     },
     bookings: {},
-    overlays: {},
+    overlays: {listings: false},
     tours: {},
     excursions: {},
     filtered: {
@@ -14,13 +14,15 @@ const state = () => ({
             location: "",
             cost: [0, 500],
             search: "",
-            seasons: []
+            seasons: [],
+            type: ''
         },
         excursions: {
             location: "",
             cost: [0, 500],
             search: "",
-            seasons: []
+            seasons: [],
+            type: ''
         }
     },
     transfers: {},
@@ -40,7 +42,7 @@ const actions = {
         state.counter++
     },
     sendBooking(state, payload) {
-        const ref = this.$fireStore.collection('bookings').doc('new')
+        const ref = this.$fireStore.collection('bookings').doc('v1')
         return ref.set({ [payload.timestamp]: payload }, { merge: true })
     },
     update(state, payload) {
@@ -63,7 +65,7 @@ const actions = {
         })
     },
     getBookings({ commit, state }) {
-        const ref = this.$fireStore.collection('bookings').doc('new')
+        const ref = this.$fireStore.collection('bookings').doc('v1')
         ref.get().then((data) => {
             console.log(data.exists, data.data())
             data.exists ? commit('setState', { type: 'bookings', data: data.data() }) : null

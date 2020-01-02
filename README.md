@@ -27,3 +27,14 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 * SEO / SSR
 * Transfers
 * Admin Auth
+* Booking button on listings
+* Language flag size increase on select
+
+* Subnav below slider
+* Header margins to match content
+* Different color button on thank you view
+* name of ppl booking and checkbox for contact
+* add types to tours and excursions
+* more space on booking admin view
+* filter -- hit apply to close on mobile
+* offer - hide double book

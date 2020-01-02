@@ -11,7 +11,7 @@
       <v-tab @click="selected = 'bookings'; $store.dispatch('getBookings')">bookings</v-tab>
       <v-tab v-if="save">
         <v-btn
-          @click="$store.dispatch(selected === 'site' ? 'updateSite' : 'update', {type: selected, data: copy[selected]}); save = false; saveConfirm()"
+          @click="$store.dispatch(selected === 'site' || selected === 'bookings' ? 'updateSite' : 'update', {type: selected, data: copy[selected]}); save = false; saveConfirm()"
           outlined
           color="secondary"
           dark
@@ -52,19 +52,26 @@
       </v-form>
     </v-card>
 
-    <v-card v-if="selected === 'bookings'">
+    <div v-if="selected === 'bookings'">
       <v-card-title>Bookings</v-card-title>
-      <v-card-text v-for="(booking, bookingKey) in $store.state.bookings" :key="bookingKey">
-        <span>{{booking.date}}</span>
-        <b>{{booking.item.name}}</b>
-        <a class="px-2" :href="'mailto:' + booking.email">{{booking.email}}</a>
-        <div class="d-flex flex-wrap">
-          <div class="px-1">People: {{booking.number}}</div>
-          <div class="px-1">Phone: {{booking.phone}}</div>
+      <v-card :class="booking.status === 'complete' ? 'dark accent' : null" class="ma-1 pa-2" v-for="(booking, bookingKey) in copy.bookings" :key="bookingKey">
+        <div class="d-flex flex-wrap justify-space-between">
+          <b>{{booking.item.name}}</b>
+          <div class="mx-2">{{booking.name}}</div>
+          <v-spacer></v-spacer>
+          <a class="" :href="'mailto:' + booking.email">{{booking.email}}</a>
+        </div>
+        <v-card-subtitle class="mb-2 px-0 d-flex flex-wrap justify-space-between  align-center">
+          <span>{{booking.date}}</span>
+          <span class="mx-2 d-flex align-center">Status: <v-select @input="save=true" :items="['new', 'emailed', 'booked', 'complete']" class="mx-2" v-model="booking.status"></v-select></span>
+        </v-card-subtitle>
+        <div class="d-flex flex-wrap justify-space-between">
+          <div class="">People: {{booking.number}}</div>
+          <div class="">Phone: {{booking.phone}}</div>
           <span>[ID: {{bookingKey}}]</span>
         </div>
-      </v-card-text>
-    </v-card>
+      </v-card>
+    </div>
 
     <v-simple-table fixed-header v-for="(section, sectionKey) in sections" :key="sectionKey">
       <template v-slot:default v-if="section.name === selected">
@@ -149,7 +156,8 @@ export default {
         tours: this.clone(this.$store.state.tours),
         excursions: this.clone(this.$store.state.excursions),
         transfers: this.clone(this.$store.state.transfers),
-        site: this.clone(this.$store.state.site)
+        site: this.clone(this.$store.state.site),
+        bookings: this.clone(this.$store.state.bookings)
       };
     }
   },
@@ -167,6 +175,7 @@ export default {
             { name: "cost", type: "number" },
             { name: "details", type: "textarea" },
             { name: "location", type: "text" },
+            { name: "type", type: "text" },
             {
               name: "season",
               type: "select",
@@ -185,6 +194,7 @@ export default {
             { name: "cost", type: "number" },
             { name: "details", type: "textarea" },
             { name: "location", type: "text" },
+            { name: "type", type: "text" },
             {
               name: "season",
               type: "select",

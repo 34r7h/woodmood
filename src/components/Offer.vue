@@ -1,25 +1,26 @@
 <template>
   <div v-if="$store.state[type][id]">
     <v-container fluid class="grey lighten-5">
-      <v-card class="px-1 d-flex justify-space-between align-center flex-wrap">
-        <div class="d-flex flex-column justify-center">
-          <v-card-title>{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
-          <v-card-subtitle>{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
-        </div>
-        <v-spacer />
-        <v-card-actions class="d-flex flex-grow-1">
-          <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
-        </v-card-actions>
-      </v-card>
-      <br />
+      <mainnav style="width:100%;" class="d-none d-sm-flex" />
       <v-row no-gutters>
         <v-col cols="12" sm="7">
-          <v-card class="d-flex flex-column pa-2">
+          <v-card class="d-flex flex-column pa-2 mb-2">
+            <v-card class="px-1 d-flex justify-space-between align-center flex-wrap mb-2 d-sm-none">
+            <div class="d-flex flex-column justify-center">
+              <v-card-title>{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
+              <v-card-subtitle>{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
+            </div>
+            <v-spacer />
+            <v-card-actions class="d-flex flex-grow-1">
+              <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
+            </v-card-actions>
+          </v-card>
             <v-img :src="$store.state[type][id].image"></v-img>
-            <v-card-subtitle class="d-flex justify-space-around">
+            <v-card-subtitle class="d-flex justify-space-between">
+              Seasons: 
               <v-chip
                 small
-                class="label"
+                class="label pa-1"
                 v-for="(season, seasonIndex) in $store.state[type][id].season"
                 :key="seasonIndex"
               >
@@ -27,6 +28,7 @@
                 {{season}}
               </v-chip>
             </v-card-subtitle>
+            <v-card-subtitle class="px-4 py-0">Tour Type: {{$store.state[type][id].type}}</v-card-subtitle>
 
             <v-card-text>
               <vue-simple-markdown :source="$store.state[type][id].details"></vue-simple-markdown>
@@ -34,7 +36,17 @@
             <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
           </v-card>
         </v-col>
-        <v-col cols="12" sm="5" class="pa-1">
+        <v-col cols="12" sm="5" class="px-1">
+          <v-card class="px-0 justify-space-between align-center flex-wrap mb-2 d-none d-sm-flex">
+            <div class="d-flex flex-column justify-center">
+              <v-card-title>{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
+              <v-card-subtitle>{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
+            </div>
+            <v-spacer />
+            <v-card-actions class="d-flex flex-grow-1">
+              <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
+            </v-card-actions>
+          </v-card>
           <v-card flat class="pa-1">
             <featured nodetails="true" />
           </v-card>
@@ -54,8 +66,10 @@
 <script>
 import Featured from "./Featured";
 import Booking from "./Booking";
+import Mainnav from "./Mainnav";
+
 export default {
-  components: { Featured, Booking },
+  components: { Featured, Booking, Mainnav },
   methods: {
     overlays() {
       this.$store.commit("setState", {

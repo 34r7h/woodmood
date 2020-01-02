@@ -66,7 +66,7 @@
         <div>People: {{bookingDetails.number}}</div>
         <div>Date: {{bookingDetails.date}}</div>
     </v-card-text>
-    <v-btn width="100%" @click="close" class="primary">Tap to close</v-btn>
+    <v-btn width="100%" @click="close" class="secondary">Tap to close</v-btn>
   </div>
 </template>
 <script>
