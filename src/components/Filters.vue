@@ -3,7 +3,7 @@
     <h2>Filters</h2>
     <br />
     <v-btn class="secondary"
-      @click="updateFilters(); $store.commit('setState', {type: 'overlays', data: {listings: false}})"
+      @click="updateFilters(); $store.commit('setState', {type: 'overlayFilter', data: false})"
     >Apply</v-btn>
     <v-form ref="form" v-model="valid">
       <v-text-field v-model="copy.search" label="Search text" single-line type="text"></v-text-field>

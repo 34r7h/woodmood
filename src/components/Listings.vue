@@ -5,7 +5,7 @@
       <h1>{{type.toUpperCase()}}</h1>
       <v-btn
         class="d-flex d-sm-none"
-        @click="$store.commit('setState', {type: 'overlays', data: {listings: !$store.state.overlays.listings}})"
+        @click="$store.commit('setState', {type: 'overlayFilter', data: true})"
       >Filters</v-btn>
     </div>
     <v-row no-gutters>
@@ -35,7 +35,7 @@
                     <div class="flex-grow-1 d-flex flex-wrap align-center justify-space-around">
                       <h2>{{item.name.toUpperCase()}}</h2>
                       <div class="mx-4">from ${{item.cost}}</div>
-                      <v-btn small class="my-2 success flex-grow-1" @click.prevent="overlay = true; book = {id: item.id, type: type}">Reserve</v-btn>
+                      <v-btn small class="my-2 success flex-grow-1" @click.prevent="$store.commit('setState', {type: 'overlayListings', data: true}); book = {id: item.id, type: type}">Reserve</v-btn>
                     </div>
                     
                   </v-card>
@@ -51,17 +51,17 @@
         </v-banner>
       </v-col>
     </v-row>
-    <v-overlay :value="$store.state.overlays.listings">
+    <v-overlay :value="$store.state.overlayFilter">
       <v-card light class="ma-2 pa-4">
-        <v-btn x-small @click="$store.commit('setState', {type: 'overlays', data: {listings: false}})">
+        <v-btn x-small @click="$store.commit('setState', {type: 'overlayFilter', data: false})">
           <v-icon small>mdi-close</v-icon>Close
         </v-btn>
         <filters style="width: 100%" :type="type" />
       </v-card>
     </v-overlay>
-    <v-overlay :value="overlay">
+    <v-overlay :value="$store.state.overlayListings">
       <v-card light class="ma-2 pa-4">
-        <v-btn text small @click="overlay = false; book = {}">
+        <v-btn text small @click="$store.commit('setState', {type: 'overlayListings', data: false}); book = {}">
           <v-icon small>mdi-close</v-icon>Close
         </v-btn>
         <booking v-if="book.type && book.id" :type="book.type" :item="$store.state[book.type][book.id]" />

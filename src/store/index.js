@@ -6,7 +6,10 @@ const state = () => ({
         winter: 'snowflake',
     },
     bookings: {},
-    overlays: {listings: false, featured: {}},
+    overlayFeatured: false,
+    overlayFilter: false,
+    overlayListings: false,
+    overlayOffer: false,
     tours: {},
     excursions: {},
     filtered: {
@@ -26,7 +29,8 @@ const state = () => ({
         }
     },
     transfers: {},
-    site: {}
+    site: {},
+    user: null
 
 })
 
@@ -37,6 +41,18 @@ const mutations = {
 }
 
 const actions = {
+    login({ commit }, user) {
+        this.$fireAuth.signInWithEmailAndPassword(user.email, user.password).then((data) => {
+            console.log(data.user.uid)
+            commit('setState', {type: 'user', data: data.user.uid})
+        })
+    },
+    logout({ commit }) {
+        console.log('logout')
+        this.$fireAuth.signOut().then(() => {
+            commit('setState', {type: 'user', data: null})
+        })
+    },
     add(state) {
         state.counter++
     },

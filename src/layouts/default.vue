@@ -26,7 +26,7 @@
       <mainnav style="width:100%;" sidebar="true" />
     </v-navigation-drawer>
     <v-footer :fixed="fixed" app>
-      <span>&copy; {{(new Date()).getFullYear()}}</span>
+      <span @click="admin++; admin > 2 ? $router.push('admin') : null">&copy; {{(new Date()).getFullYear()}}</span>
     </v-footer>
   </v-app>
 </template>
@@ -50,6 +50,7 @@ export default {
   },
   data() {
     return {
+      admin: 0,
       clipped: false,
       dark: false,
       drawer: false,

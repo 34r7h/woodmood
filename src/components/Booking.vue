@@ -87,8 +87,16 @@ export default {
   methods: {
     close() {
       this.$store.commit("setState", {
-        type: "overlays",
-        data: { [this.item.id]: !this.$store.state.overlays[this.item.id] }
+        type: "overlayOffer",
+        data: false
+      });
+      this.$store.commit("setState", {
+        type: "overlayListings",
+        data: false
+      });
+      this.$store.commit("setState", {
+        type: "overlayFeatured",
+        data: false
       });
     },
     sendRequest() {

@@ -8,6 +8,7 @@
             {{item.name}}
           </v-btn>
         </router-link>
+        <v-btn v-if="$store.state.user" @click="$store.dispatch('logout')">Sign Out</v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>

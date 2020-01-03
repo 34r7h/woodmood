@@ -47,7 +47,7 @@
                 <v-btn class="secondary flex-grow-1 ma-1">More Info</v-btn>
               </router-link>
               <v-btn v-if="!nodetails"
-                @click="overlay = true; book = {id: item.id, type: featureKey}"
+                @click="$store.commit('setState', {type: 'overlayFeatured', data: true}); book = {id: item.id, type: featureKey}"
                 class="success flex-grow-1"
               >Reserve Now</v-btn>
             </v-card-actions>
@@ -55,9 +55,10 @@
         </div>
         <hr v-if="nodetails" />
       </v-card>
-      <v-overlay :value="overlay">
+      <v-overlay :value="$store.state.overlayFeatured">
       <v-card light class="ma-2 pa-4">
-        <v-btn text small @click="overlay = false; book = {}">
+        <v-btn text small @click="$store.commit('setState', {type: 'overlayFeatured',
+        data: false}); book = {}">
           <v-icon small>mdi-close</v-icon>Close
         </v-btn>
         <booking v-if="book.type && book.id" :type="book.type" :item="$store.state[book.type][book.id]" />
