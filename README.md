@@ -25,11 +25,11 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 ## TODO
 * Russian Translation
 * SEO / SSR
-* Transfers
 * Admin Auth
 * Booking button on listings
 * Language flag size increase on select
 
+* Transfers
 * Subnav below slider
 * Header margins to match content
 * Different color button on thank you view

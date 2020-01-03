@@ -1,6 +1,6 @@
 <template>
   <v-container v-if="$store.state[type]" fluid class="grey lighten-5">
-    <mainnav style="width:100%;" class="d-none d-sm-flex" />
+
     <div class="d-flex justify-space-between align-center">
       <h1>{{type.toUpperCase()}}</h1>
       <v-btn
@@ -61,9 +61,9 @@
 <script>
 import _ from "lodash";
 import Filters from "./Filters";
-import Mainnav from "./Mainnav";
+
 export default {
-  components: { Filters, Mainnav },
+  components: { Filters },
   computed: {
     list() {
       return _.orderBy(

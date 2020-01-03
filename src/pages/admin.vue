@@ -211,14 +211,10 @@ export default {
             { name: "image", type: "image-url" },
             { name: "name", type: "text" },
             { name: "cost", type: "number" },
+            { name: "to", type: "text" },
+            { name: "from", type: "text" },
+            { name: "type", type: "text" },
             { name: "details", type: "textarea" },
-            {
-              name: "season",
-              type: "select",
-              multiple: true,
-              options: ["spring", "summer", "fall", "winter"]
-            },
-            { name: "featured", type: "switch" },
             { name: "remove", type: "delete" }
           ]
         }

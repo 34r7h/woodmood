@@ -1,7 +1,7 @@
 <template>
   <div v-if="$store.state[type][id]">
     <v-container fluid class="grey lighten-5">
-      <mainnav style="width:100%;" class="d-none d-sm-flex" />
+
       <v-row no-gutters>
         <v-col cols="12" sm="7">
           <v-card class="d-flex flex-column pa-2 mb-2">
@@ -66,10 +66,10 @@
 <script>
 import Featured from "./Featured";
 import Booking from "./Booking";
-import Mainnav from "./Mainnav";
+
 
 export default {
-  components: { Featured, Booking, Mainnav },
+  components: { Featured, Booking },
   methods: {
     overlays() {
       this.$store.commit("setState", {
