@@ -26,7 +26,10 @@
             style="width:100%; min-width: 180px; flex: 1"
           >
             <v-card-title class="mb-4" v-if="!nodetails">{{item.name}}</v-card-title>
-            <v-card-subtitle style="width:100%;" class="d-flex align-center flex-wrap justify-space-between">
+            <v-card-subtitle
+              style="width:100%;"
+              class="d-flex align-center flex-wrap justify-space-between"
+            >
               <b>{{item.location}}</b>
               <span v-for="(season, seasonIndex) in item.season" :key="seasonIndex">
                 <v-icon x-small>mdi-{{$store.state.icons[season]}}</v-icon>
@@ -37,27 +40,41 @@
             <v-card-text v-if="!nodetails">
               <vue-simple-markdown :source="item.details.substring(0,280) + '...'"></vue-simple-markdown>
             </v-card-text>
-            <v-card-actions style="width:100%">
-              <v-card-title class>From ${{item.cost}}</v-card-title>
+            <v-card-title class>From ${{item.cost}}</v-card-title>
+            <v-card-actions class="pa-4 d-flex justify-space-between" style="width:100%">
 
-              <router-link :to="'/offer/'+ featureKey+ '/' + item.id">
-                <v-btn class="primary">More Info</v-btn>
+              <router-link :to="'/offer/'+ featureKey+ '/' + item.id" class="flex-grow-1">
+                <v-btn class="secondary">More Info</v-btn>
               </router-link>
+              <v-btn v-if="!nodetails"
+                @click="overlay = true; book = {id: item.id, type: featureKey}"
+                class="success flex-grow-1"
+              >Reserve Now</v-btn>
             </v-card-actions>
           </div>
         </div>
         <hr v-if="nodetails" />
       </v-card>
+      <v-overlay :value="overlay">
+      <v-card light class="ma-2 pa-4">
+        <v-btn text small @click="overlay = false; book = {}">
+          <v-icon small>mdi-close</v-icon>Close
+        </v-btn>
+        <booking v-if="book.type && book.id" :type="book.type" :item="$store.state[book.type][book.id]" />
+      </v-card>
+    </v-overlay>
     </div>
+    
   </div>
 </template>
 <script>
 import _ from "lodash";
 import Slider from "./Slider";
 import Mainnav from "./Mainnav";
+import Booking from "./Booking";
 
 export default {
-  components: { Slider, Mainnav },
+  components: { Slider, Mainnav, Booking },
   computed: {
     featuredObject() {
       return {
@@ -71,6 +88,12 @@ export default {
         ).reverse()
       };
     }
+  },
+  data() {
+    return {
+      overlay: false,
+      book: {}
+    };
   },
   props: ["nodetails"]
 };

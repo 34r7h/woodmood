@@ -26,9 +26,10 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 * Russian Translation
 * SEO / SSR
 * Admin Auth
-* Booking button on listings
 * Language flag size increase on select
 
+
+* Booking button on listings
 * Transfers
 * Subnav below slider
 * Header margins to match content

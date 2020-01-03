@@ -47,9 +47,9 @@ export default {
 
 <style scoped>
 [hero] {
-  color: rgba(0,0,0,.6);
+  color: rgba(255,255,255,.86);
   font-size: 200%;
-  text-shadow: 0 0 6px rgba(255,255,255,.5), 0px -1px 1px rgba(255,255,255,.5);
+  text-shadow: 0 0 6px rgba(255,255,255,.5), 0px -1px 1px rgba(255,255,255,.5), 0px 2px 2px rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100%;
   object-fit: contain;

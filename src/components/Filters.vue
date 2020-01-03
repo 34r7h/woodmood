@@ -2,12 +2,12 @@
   <div class="d-flex flex-column" style="width: 100%">
     <h2>Filters</h2>
     <br />
-    <v-btn
+    <v-btn class="secondary"
       @click="updateFilters(); $store.commit('setState', {type: 'overlays', data: {listings: false}})"
     >Apply</v-btn>
     <v-form ref="form" v-model="valid">
       <v-text-field v-model="copy.search" label="Search text" single-line type="text"></v-text-field>
-
+      <label>Filter cost</label>
       <v-range-slider v-model="copy.cost" :max="500" :min="0" hide-details class="align-center">
         <template v-slot:prepend>
           <v-text-field
@@ -17,6 +17,7 @@
             single-line
             type="number"
             style="width: 40px"
+            id="lowcost"
           ></v-text-field>
         </template>
         <template v-slot:append>
@@ -27,6 +28,7 @@
             single-line
             type="number"
             style="width: 40px"
+            id="highcost"
           ></v-text-field>
         </template>
       </v-range-slider>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-card width="100%">
+    <v-card width="100%" class="ma-2">
       <v-flex>
-        <v-data-table :search="search" :headers="headers" :items="items" :items-per-page="10" class>
+        <v-data-table :search="search" :headers="headers" :items="items" :items-per-page="10">
           <template v-slot:top >
             <div class="d-flex justify-space-between align-center">
               <v-card-title>Transfers</v-card-title>

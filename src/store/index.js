@@ -6,7 +6,7 @@ const state = () => ({
         winter: 'snowflake',
     },
     bookings: {},
-    overlays: {listings: false},
+    overlays: {listings: false, featured: {}},
     tours: {},
     excursions: {},
     filtered: {

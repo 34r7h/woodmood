@@ -99,6 +99,6 @@ export default {
       this.requestSent = true;
     }
   },
-  props: ["item"]
+  props: ["item", 'id', 'type']
 };
 </script>

@@ -81,23 +81,23 @@ module.exports = {
       dark: true,
       themes: {
         dark: {
-          primary: colors.red.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
+          primary: '#98261E',
+          accent: '#C04C28',
+          secondary: '#031C6A',
+          info: '#F7C732',
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          success: '#326727'
         },
         light: {
-          primary: colors.red.darken2,
-          secondary: '#424242',
-          accent: '#82B1FF',
-          error: '#FF5252',
-          info: '#2196F3',
-          success: colors.green.accent3,
-          warning: '#FFC107',
-        }
+          primary: '#98261E',
+          accent: '#C04C28',
+          secondary: '#031C6A',
+          info: '#F7C732',
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: '#326727'
+        },
       }
     }
   },

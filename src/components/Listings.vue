@@ -32,8 +32,12 @@
                     flat
                     class="d-flex flex-wrap ma-2 px-2 flex-shrink-1 justify-space-between align-center"
                   >
-                    <h2>{{item.name}}</h2>
-                    <b>from ${{item.cost}}</b>
+                    <div class="flex-grow-1 d-flex flex-wrap align-center justify-space-around">
+                      <h2>{{item.name.toUpperCase()}}</h2>
+                      <div class="mx-4">from ${{item.cost}}</div>
+                      <v-btn small class="my-2 success flex-grow-1" @click.prevent="overlay = true; book = {id: item.id, type: type}">Reserve</v-btn>
+                    </div>
+                    
                   </v-card>
                 </v-img>
               </router-link>
@@ -49,10 +53,18 @@
     </v-row>
     <v-overlay :value="$store.state.overlays.listings">
       <v-card light class="ma-2 pa-4">
-        <v-btn @click="$store.commit('setState', {type: 'overlays', data: {listings: false}})">
-          <v-icon>mdi-close</v-icon>Close
+        <v-btn x-small @click="$store.commit('setState', {type: 'overlays', data: {listings: false}})">
+          <v-icon small>mdi-close</v-icon>Close
         </v-btn>
         <filters style="width: 100%" :type="type" />
+      </v-card>
+    </v-overlay>
+    <v-overlay :value="overlay">
+      <v-card light class="ma-2 pa-4">
+        <v-btn text small @click="overlay = false; book = {}">
+          <v-icon small>mdi-close</v-icon>Close
+        </v-btn>
+        <booking v-if="book.type && book.id" :type="book.type" :item="$store.state[book.type][book.id]" />
       </v-card>
     </v-overlay>
   </v-container>
@@ -61,9 +73,11 @@
 <script>
 import _ from "lodash";
 import Filters from "./Filters";
+import Booking from "./Booking";
+
 
 export default {
-  components: { Filters },
+  components: { Filters, Booking },
   computed: {
     list() {
       return _.orderBy(
@@ -91,6 +105,7 @@ export default {
   },
   data() {
     return {
+      book: {},
       sort: "id",
       overlay: false
     };
