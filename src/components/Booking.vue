@@ -54,7 +54,6 @@
       <v-btn :disabled="!bookingDetails.email || bookingDetails.email.indexOf('@') < 0 || bookingDetails.email.indexOf('.') < 0  " @click="sendRequest()" width="100%" x-large class="success">
         <b>Send Request</b>
       </v-btn>
-      <code class="small" v-if="showError">{{error}}</code>
     </v-form>
   </div>
   <div v-else>
@@ -84,8 +83,6 @@ export default {
         number: ""
       },
       chooseDate: false,
-      showError: false,
-      error: 'Please enter a valid email.',
       requestSent: false
     };
   },
@@ -105,9 +102,6 @@ export default {
       });
     },
     sendRequest() {
-      if (!this.bookingDetails.email) {
-        return this.showError = true
-      } 
       this.bookingDetails.timestamp = Date.now()
       this.bookingDetails.item = this.item
       this.$store.dispatch('sendBooking', this.bookingDetails)
