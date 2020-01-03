@@ -24,7 +24,7 @@
         v-model="bookingDetails.email"
         label="Email Address"
         single-line
-        type="text"
+        type="email"
       ></v-text-field>
       <v-text-field
         v-if="!chooseDate"
@@ -51,22 +51,25 @@
           @click="chooseDate = true"
         >{{bookingDetails.date || 'Choose Date'}}</v-btn>
       </div>
-      <v-btn @click="sendRequest()" width="100%" x-large class="success">
+      <v-btn :disabled="!bookingDetails.email || bookingDetails.email.indexOf('@') < 0 || bookingDetails.email.indexOf('.') < 0  " @click="sendRequest()" width="100%" x-large class="success">
         <b>Send Request</b>
       </v-btn>
+      <code class="small" v-if="showError">{{error}}</code>
     </v-form>
   </div>
   <div v-else>
-    <v-card-title>Thank you, we'll be in touch.</v-card-title>
-    <v-card-subtitle>Please check the submitted info. If there's a mistake, send the request again or contact us.</v-card-subtitle>
-    <v-card-text>
-        <div>Name: {{bookingDetails.name}}</div>
-        <div>Email: {{bookingDetails.email}}</div>
-        <div>Phone: {{bookingDetails.phone}}</div>
-        <div>People: {{bookingDetails.number}}</div>
-        <div>Date: {{bookingDetails.date}}</div>
-    </v-card-text>
-    <v-btn width="100%" @click="close" class="secondary">Tap to close</v-btn>
+    <div v-if="requestSent">
+      <v-card-title>Thank you, we'll be in touch.</v-card-title>
+      <v-card-subtitle>Please check the submitted info. If there's a mistake, send the request again or contact us.</v-card-subtitle>
+      <v-card-text>
+          <div>Name: {{bookingDetails.name}}</div>
+          <div>Email: {{bookingDetails.email}}</div>
+          <div>Phone: {{bookingDetails.phone}}</div>
+          <div>People: {{bookingDetails.number}}</div>
+          <div>Date: {{bookingDetails.date}}</div>
+      </v-card-text>
+      <v-btn width="100%" @click="close" class="secondary">Tap to close</v-btn>
+    </div>
   </div>
 </template>
 <script>
@@ -81,6 +84,8 @@ export default {
         number: ""
       },
       chooseDate: false,
+      showError: false,
+      error: 'Please enter a valid email.',
       requestSent: false
     };
   },
@@ -100,6 +105,9 @@ export default {
       });
     },
     sendRequest() {
+      if (!this.bookingDetails.email) {
+        return this.showError = true
+      } 
       this.bookingDetails.timestamp = Date.now()
       this.bookingDetails.item = this.item
       this.$store.dispatch('sendBooking', this.bookingDetails)

@@ -55,7 +55,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-overlay :value="$store.state.overlays[id]">
+    <v-overlay :value="$store.state.overlayOffer">
       <v-card light class="ma-2 pa-4">
         <v-btn text small @click="overlays()">
           <v-icon small>mdi-close</v-icon>Close
@@ -75,15 +75,15 @@ export default {
   methods: {
     overlays() {
       this.$store.commit("setState", {
-        type: "overlays",
-        data: { [this.id]: !this.$store.state.overlays[this.id] }
+        type: "overlayOffer",
+        data: !this.$store.state.overlayOffer
       });
     }
   },
   mounted() {
     this.$store.commit("setState", {
-      type: "overlays",
-      data: { [this.id]: false }
+      type: "overlayOffer",
+      data: false
     });
   },
   props: ["type", "id"]
