@@ -32,7 +32,6 @@ const state = () => ({
 
 const mutations = {
     setState(state, { type, data }) {
-        console.log(state, data)
         state[type] = data
     }
 }
@@ -46,12 +45,10 @@ const actions = {
         return ref.set({ [payload.timestamp]: payload }, { merge: true })
     },
     update(state, payload) {
-        console.log('update', payload.type, payload.data)
         const ref = this.$fireStore.collection('items').doc(payload.type)
         return ref.set(payload.data)
     },
     updateSite(state, payload) {
-        console.log('update', payload.type, payload.data)
         const ref = this.$fireStore.collection(payload.type).doc('v1')
         return ref.set(payload.data)
     },
@@ -59,7 +56,6 @@ const actions = {
         ['tours', 'excursions', 'transfers'].map((type) => {
             const ref = this.$fireStore.collection('items').doc(type)
             ref.get().then((data) => {
-                console.log(data.exists)
                 data.exists ? commit('setState', { type, data: data.data() }) : null
             })
         })
@@ -67,14 +63,14 @@ const actions = {
     getBookings({ commit, state }) {
         const ref = this.$fireStore.collection('bookings').doc('v1')
         ref.get().then((data) => {
-            console.log(data.exists, data.data())
+
             data.exists ? commit('setState', { type: 'bookings', data: data.data() }) : null
         })
     },
     getSite({ commit, state }) {
         const ref = this.$fireStore.collection('site').doc('v1')
         ref.get().then((data) => {
-            console.log(data.exists, data.data())
+
             data.exists ? commit('setState', { type: 'site', data: data.data() }) : null
         })
     }

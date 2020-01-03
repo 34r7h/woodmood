@@ -54,23 +54,25 @@
 
     <div v-if="selected === 'bookings'">
       <v-card-title>Bookings</v-card-title>
-      <v-card :class="booking.status === 'complete' ? 'dark accent' : null" class="ma-1 pa-2" v-for="(booking, bookingKey) in copy.bookings" :key="bookingKey">
-        <div class="d-flex flex-wrap justify-space-between">
-          <b>{{booking.item.name}}</b>
-          <div class="mx-2">{{booking.name}}</div>
-          <v-spacer></v-spacer>
-          <a class="" :href="'mailto:' + booking.email">{{booking.email}}</a>
-        </div>
-        <v-card-subtitle class="mb-2 px-0 d-flex flex-wrap justify-space-between  align-center">
-          <span>{{booking.date}}</span>
-          <span class="mx-2 d-flex align-center">Status: <v-select @input="save=true" :items="['new', 'emailed', 'booked', 'complete']" class="mx-2" v-model="booking.status"></v-select></span>
-        </v-card-subtitle>
-        <div class="d-flex flex-wrap justify-space-between">
-          <div class="">People: {{booking.number}}</div>
-          <div class="">Phone: {{booking.phone}}</div>
-          <span>[ID: {{bookingKey}}]</span>
-        </div>
-      </v-card>
+      <div class="flex-column-reverse d-flex">
+        <v-card :class="booking.status === 'complete' ? 'dark accent' : booking.status === 'booked' ? 'dark info' : null" :style="booking.status === 'complete' ? 'order: 0' : booking.status === 'booked' ? 'order:1' : 'order: 2' " class="ma-1 pa-2" v-for="(booking, bookingKey) in copy.bookings" :key="bookingKey">
+          <div class="d-flex flex-wrap justify-space-between">
+            <b>{{booking.item.name}}</b>
+            <div class="mx-2">{{booking.name}}</div>
+            <v-spacer></v-spacer>
+            <a class="" :href="'mailto:' + booking.email">{{booking.email}}</a>
+          </div>
+          <v-card-subtitle class="mb-2 px-0 d-flex flex-wrap justify-space-between  align-center">
+            <span>{{booking.date}}</span>
+            <span class="mx-2 d-flex align-center">Status: <v-select @input="save=true" :items="['new', 'emailed', 'booked', 'complete']" class="mx-2" v-model="booking.status"></v-select></span>
+          </v-card-subtitle>
+          <div class="d-flex flex-wrap justify-space-between">
+            <div class="">People: {{booking.number}}</div>
+            <div class="">Phone: {{booking.phone}}</div>
+            <span>[ID: {{bookingKey}}]</span>
+          </div>
+        </v-card>
+      </div>
     </div>
 
     <v-simple-table fixed-header v-for="(section, sectionKey) in sections" :key="sectionKey">
@@ -235,7 +237,7 @@ export default {
       return JSON.parse(JSON.stringify(obj));
     },
     remove(id, selected) {
-      console.log("delete", id, selected);
+
       delete this.copy[this.selected][id];
       this.$store.commit("setState", {
         type: selected,

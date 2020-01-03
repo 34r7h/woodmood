@@ -3,7 +3,7 @@
     <v-toolbar style="width:100%;" flat class="d-flex">
       <v-toolbar-items style="width:100%;" class="d-flex" :class="sidebar ? 'flex-column align-start' : ''">
         <router-link v-for="(item, itemKey) in menuItems" :key="itemKey" :to="item.link" style="flex: 1; min-height: 60px;">
-          <v-btn text style="flex: 1; min-height: 60px; width:100%;">
+          <v-btn class="secondary--text" text style="flex: 1; min-height: 60px; width:100%;">
             <v-icon>mdi-{{item.icon}}</v-icon>
             {{item.name}}
           </v-btn>

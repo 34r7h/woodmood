@@ -30,9 +30,9 @@
               style="width:100%;"
               class="d-flex align-center flex-wrap justify-space-between"
             >
-              <b>{{item.location}}</b>
+              <b class="primary--text">{{item.location}}</b>
               <span v-for="(season, seasonIndex) in item.season" :key="seasonIndex">
-                <v-icon x-small>mdi-{{$store.state.icons[season]}}</v-icon>
+                <v-icon class=" accent--text" x-small>mdi-{{$store.state.icons[season]}}</v-icon>
                 {{season}}
               </span>
             </v-card-subtitle>
@@ -41,10 +41,10 @@
               <vue-simple-markdown :source="item.details.substring(0,280) + '...'"></vue-simple-markdown>
             </v-card-text>
             <v-card-title class>From ${{item.cost}}</v-card-title>
-            <v-card-actions class="pa-4 d-flex justify-space-between" style="width:100%">
+            <v-card-actions class="pa-3 d-flex justify-space-between" style="width:100%">
 
-              <router-link :to="'/offer/'+ featureKey+ '/' + item.id" class="flex-grow-1">
-                <v-btn class="secondary">More Info</v-btn>
+              <router-link :to="'/offer/'+ featureKey+ '/' + item.id" class="flex-grow-1 d-flex ma-1">
+                <v-btn class="secondary flex-grow-1 ma-1">More Info</v-btn>
               </router-link>
               <v-btn v-if="!nodetails"
                 @click="overlay = true; book = {id: item.id, type: featureKey}"

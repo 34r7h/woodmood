@@ -92,7 +92,6 @@ export default {
       });
     },
     sendRequest() {
-      console.log(this.item, this.bookingDetails);
       this.bookingDetails.timestamp = Date.now()
       this.bookingDetails.item = this.item
       this.$store.dispatch('sendBooking', this.bookingDetails)

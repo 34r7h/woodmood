@@ -16,19 +16,21 @@
             </v-card-actions>
           </v-card>
             <v-img :src="$store.state[type][id].image"></v-img>
-            <v-card-subtitle class="d-flex justify-space-between">
+            <v-card-subtitle class="d-flex justify-space-between align-center pa-0 px-4">
               Seasons: 
-              <v-chip
+              <div
                 small
-                class="label pa-1"
+                class="label pa-0 ma-0"
                 v-for="(season, seasonIndex) in $store.state[type][id].season"
                 :key="seasonIndex"
               >
-                <v-icon small>mdi-{{$store.state.icons[season]}}</v-icon>
+                <v-icon class="accent--text" small>mdi-{{$store.state.icons[season]}}</v-icon>
                 {{season}}
-              </v-chip>
+              </div>
             </v-card-subtitle>
-            <v-card-subtitle class="px-4 py-0">Tour Type: {{$store.state[type][id].type}}</v-card-subtitle>
+            <v-card-subtitle class="primary--text pa-4 pb-0"><h2>{{$store.state[type][id].location}} - {{$store.state[type][id].name}}</h2></v-card-subtitle>
+            
+            <v-card-subtitle >Type: {{$store.state[type][id].type}}</v-card-subtitle>
 
             <v-card-text>
               <vue-simple-markdown :source="$store.state[type][id].details"></vue-simple-markdown>
@@ -39,8 +41,8 @@
         <v-col cols="12" sm="5" class="px-1">
           <v-card class="px-0 justify-space-between align-center flex-wrap mb-2 d-none d-sm-flex">
             <div class="d-flex flex-column justify-center">
-              <v-card-title>{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
-              <v-card-subtitle>{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
+              <v-card-title class="pa-0 px-2">{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
+              <v-card-subtitle class="pa-2">{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
             </div>
             <v-spacer />
             <v-card-actions class="d-flex flex-grow-1">

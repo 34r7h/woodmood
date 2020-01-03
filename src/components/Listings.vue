@@ -83,7 +83,6 @@ export default {
       return _.orderBy(
         Object.values(this.$store.state[this.type]).filter((x, xKey) => {
           let toCheck = this.$store.state.filtered[this.type];
-          console.log(toCheck, x);
           return (
             JSON.stringify(x)
               .toLowerCase()
