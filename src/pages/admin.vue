@@ -91,14 +91,12 @@
           single-line
           type="url"
         ></v-text-field>
-        <v-text-field
+        <v-textarea
           @input="save=true"
           class="ma-1"
           v-model="copy.site.contact"
           label="Contact Info"
-          single-line
-          type="url"
-        ></v-text-field>
+        ></v-textarea>
         <v-text-field
           @input="save=true"
           class="ma-1"

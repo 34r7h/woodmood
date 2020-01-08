@@ -10,13 +10,22 @@
         v-for="(item, itemIndex) in feature"
         :key="itemIndex"
       >
+        <v-card-title v-if="nodetails">{{item.name}}</v-card-title>
+        <v-img
+            :aspect-ratio="16/9"
+            v-if="nodetails"
+            class="flex-grow-1 flex-shrink-1"
+            style="max-height: 400px; flex:2; width: 100%; min-height: 180px; min-width: 180px;"
+            :src="item.image"
+          ></v-img>
+
         <div
           class="d-flex flex-wrap"
           :class="!nodetails && itemIndex % 2 === 0 ? 'flex-row-reverse' : ''"
         >
-          <v-card-title v-if="nodetails">{{item.name}}</v-card-title>
           <v-img
             :aspect-ratio="16/9"
+            v-if="!nodetails"
             class="flex-grow-1 flex-shrink-1"
             style="max-height: 400px; flex:2; width: 100%; min-height: 180px; min-width: 180px;"
             :src="item.image"
@@ -41,7 +50,7 @@
               <vue-simple-markdown :source="item.details.substring(0,280) + '...'"></vue-simple-markdown>
             </v-card-text>
             <v-card-title class>From ${{item.cost}}</v-card-title>
-            <v-card-actions class="pa-3 d-flex justify-space-between" style="width:100%">
+            <v-card-actions :class="nodetails ? 'pa-0' : 'pa-3'"  class=" d-flex justify-space-between" style="width:100%">
 
               <router-link :to="'/offer/'+ featureKey+ '/' + item.id" class="flex-grow-1 d-flex ma-1">
                 <v-btn class="secondary flex-grow-1 ma-1">More Info</v-btn>
@@ -53,7 +62,7 @@
             </v-card-actions>
           </div>
         </div>
-        <hr v-if="nodetails" />
+        <hr class="my-2" v-if="nodetails" />
       </v-card>
       <v-overlay :value="$store.state.overlayFeatured">
       <v-card light class="ma-2 pa-4">

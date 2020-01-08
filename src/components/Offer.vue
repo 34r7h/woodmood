@@ -1,23 +1,22 @@
 <template>
   <div v-if="$store.state[type][id]">
     <v-container fluid class="grey lighten-5">
-
       <v-row no-gutters>
         <v-col cols="12" sm="7">
           <v-card class="d-flex flex-column pa-2 mb-2">
             <v-card class="px-1 d-flex justify-space-between align-center flex-wrap mb-2 d-sm-none">
-            <div class="d-flex flex-column justify-center">
-              <v-card-title>{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
-              <v-card-subtitle>{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
-            </div>
-            <v-spacer />
-            <v-card-actions class="d-flex flex-grow-1">
-              <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
-            </v-card-actions>
-          </v-card>
+              <div class="d-flex flex-column justify-center">
+                <v-card-title>{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
+                <v-card-subtitle>{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
+              </div>
+              <v-spacer />
+              <v-card-actions class="d-flex flex-grow-1">
+                <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
+              </v-card-actions>
+            </v-card>
             <v-img :src="$store.state[type][id].image"></v-img>
             <v-card-subtitle class="d-flex justify-space-between align-center pa-0 px-4">
-              Seasons: 
+              Seasons:
               <div
                 small
                 class="label pa-0 ma-0"
@@ -28,21 +27,27 @@
                 {{season}}
               </div>
             </v-card-subtitle>
-            <v-card-subtitle class="primary--text pa-4 pb-0"><h2>{{$store.state[type][id].location}} - {{$store.state[type][id].name}}</h2></v-card-subtitle>
-            
-            <v-card-subtitle >Type: {{$store.state[type][id].type}}</v-card-subtitle>
+            <v-card-subtitle class="primary--text pa-4 pb-0">
+              <h2>{{$store.state[type][id].location}} - {{$store.state[type][id].name}}</h2>
+            </v-card-subtitle>
+
+            <v-card-subtitle>Type: {{$store.state[type][id].type}}</v-card-subtitle>
 
             <v-card-text>
               <vue-simple-markdown :source="$store.state[type][id].details"></vue-simple-markdown>
             </v-card-text>
-            <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
+            <v-card-actions>
+              <v-btn width="200px" @click="overlays()" class="success x-large" x-large>Reserve</v-btn>
+            </v-card-actions>
           </v-card>
         </v-col>
         <v-col cols="12" sm="5" class="px-1">
           <v-card class="px-0 justify-space-between align-center flex-wrap mb-2 d-none d-sm-flex">
             <div class="d-flex flex-column justify-center">
               <v-card-title class="pa-0 px-2">{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
-              <v-card-subtitle class="pa-2">{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
+              <v-card-subtitle
+                class="pa-2"
+              >{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
             </div>
             <v-spacer />
             <v-card-actions class="d-flex flex-grow-1">
@@ -68,7 +73,6 @@
 <script>
 import Featured from "./Featured";
 import Booking from "./Booking";
-
 
 export default {
   components: { Featured, Booking },

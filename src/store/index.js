@@ -30,7 +30,11 @@ const state = () => ({
     },
     transfers: {},
     site: {},
-    user: null
+    user: null,
+    lang: {
+        en: {},
+        ru: {}
+    }
 
 })
 
