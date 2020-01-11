@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex align-center">
     <v-btn class="mx-0 secondary--text" icon>
-      <a target="blank" :href="$store.state.site.fb"><v-icon>mdi-facebook</v-icon></a>
+      <a class="mx-0 secondary--text" target="blank" :href="$store.state.site.fb"><v-icon>mdi-facebook</v-icon></a>
     </v-btn>
     <v-btn class="mx-0 secondary--text" icon>
-      <a target="blank" :href="$store.state.site.insta"><v-icon>mdi-instagram</v-icon></a>
+      <a class="mx-0 secondary--text" target="blank" :href="$store.state.site.insta"><v-icon>mdi-instagram</v-icon></a>
     </v-btn>
-    <span class="mx-3 secondary--text">
-      <router-link :to="localePath({ name: 'contact'})" ><v-btn small text class="primary white--text" outlined>{{$t("contact")}}</v-btn></router-link>
+    <span class="mx-2 secondary--text">
+      <router-link :to="localePath({ name: 'contact'})" ><v-btn small text class="secondary white--text">{{$t("contact")}}</v-btn></router-link>
     </span>
   </div>
 </template>
