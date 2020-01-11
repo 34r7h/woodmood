@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title>
         <router-link to="/">{{title}}</router-link>
@@ -8,13 +8,18 @@
       <div class="d-none d-sm-flex">
         <contact />
       </div>
-      <v-btn text>🇷🇺 / 🇬🇧</v-btn>
+      <nuxt-link :to="switchLocalePath('ru')">🇷🇺</nuxt-link>/
+      <nuxt-link :to="switchLocalePath('en')">🇬🇧</nuxt-link>
       <v-btn class="d-flex d-sm-none" icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-app-bar>
     <v-content>
-      <mainnav style="width:100%;" class="d-none d-sm-flex" v-if="$route.name !== 'index'"/>
+      <mainnav
+        style="width:100%;"
+        class="d-none d-sm-flex"
+        v-if="$route.path !== '/' && $route.path !== '/ru'"
+      />
       <nuxt />
     </v-content>
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
@@ -26,7 +31,9 @@
       <mainnav style="width:100%;" sidebar="true" />
     </v-navigation-drawer>
     <v-footer :fixed="fixed" app>
-      <span @click="admin++; admin > 2 ? $router.push('admin') : null">&copy; {{(new Date()).getFullYear()}}</span>
+      <span
+        @click="admin++; admin > 2 ? $router.push('admin') : null"
+      >&copy; {{(new Date()).getFullYear()}}</span>
     </v-footer>
   </v-app>
 </template>

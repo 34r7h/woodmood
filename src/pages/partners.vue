@@ -5,3 +5,13 @@
         </v-card-text>
     </v-card>
 </template>
+<script>
+export default {
+  // nuxtI18n: {
+  //   paths: {
+  //     en: '/partners',
+  //     ru: '/партнеры'
+  //   }
+  // }
+}
+</script>

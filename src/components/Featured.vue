@@ -1,9 +1,9 @@
 <template>
   <div>
-    <slider :slides="featuredObject" v-if="$route.name === 'index'" />
-    <mainnav v-if="$route.name === 'index'" style="width:100%;" class="d-none d-sm-flex" />
+    <slider :slides="featuredObject" v-if="$route.path === '/' || $route.path === '/ru' " />
+    <mainnav v-if="$route.path === '/' || $route.path === '/ru'" style="width:100%;" class="d-none d-sm-flex" />
     <div class="pa-2" v-for="(feature, featureKey) in featuredObject" :key="featureKey">
-      <h2>Featured {{featureKey}}</h2>
+      <h2>{{$t('featured').toUpperCase()}} {{$t(featureKey).toUpperCase()}}</h2>
       <v-card
         :flat="Boolean(nodetails)"
         class="mb-3"
@@ -42,23 +42,23 @@
               <b class="primary--text">{{item.location}}</b>
               <span v-for="(season, seasonIndex) in item.season" :key="seasonIndex">
                 <v-icon class=" accent--text" x-small>mdi-{{$store.state.icons[season]}}</v-icon>
-                {{season}}
+                {{$t(season)}}
               </span>
             </v-card-subtitle>
-            <v-card-subtitle class="px-4 py-0">Tour Type: {{item.type}}</v-card-subtitle>
+            <v-card-subtitle class="px-4 py-0">{{$t("tour type")}}: {{item.type}}</v-card-subtitle>
             <v-card-text v-if="!nodetails">
               <vue-simple-markdown :source="item.details.substring(0,280) + '...'"></vue-simple-markdown>
             </v-card-text>
-            <v-card-title class>From ${{item.cost}}</v-card-title>
+            <v-card-title class>{{$t("from")}} ${{item.cost}}</v-card-title>
             <v-card-actions :class="nodetails ? 'pa-0' : 'pa-3'"  class=" d-flex justify-space-between" style="width:100%">
 
-              <router-link :to="'/offer/'+ featureKey+ '/' + item.id" class="flex-grow-1 d-flex ma-1">
-                <v-btn class="secondary flex-grow-1 ma-1">More Info</v-btn>
-              </router-link>
+              <nuxt-link :to="localePath({ name: 'offer-' + featureKey + '-id', params: { id: item.id } })" class="flex-grow-1 d-flex ma-1">
+                <v-btn class="secondary flex-grow-1 ma-1">{{$t("more info")}}</v-btn>
+              </nuxt-link>
               <v-btn v-if="!nodetails"
                 @click="$store.commit('setState', {type: 'overlayFeatured', data: true}); book = {id: item.id, type: featureKey}"
                 class="success flex-grow-1"
-              >Reserve Now</v-btn>
+              >{{$t("reserve")}}</v-btn>
             </v-card-actions>
           </div>
         </div>
@@ -108,3 +108,24 @@ export default {
   props: ["nodetails"]
 };
 </script>
+<i18n>
+{
+  "ru": {
+    "tours": "туры",
+    "featured": "признакам",
+    "excursions": "экскурсии",
+    "contact": "контакт",
+    "about": "около",
+    "transfers": "трансфер",
+    "partners": "партнеры",
+    "tour type": "тур тип",
+    "from": "из",
+    "spring": "весна",
+    "summer": "летом",
+    "fall": "осень",
+    "winter": "зима",
+    "more info": "больше информации",
+    "reserve": "zabronirovat'"
+  }
+}
+</i18n>

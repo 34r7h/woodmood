@@ -2,11 +2,11 @@
   <v-container v-if="$store.state[type]" fluid class="grey lighten-5">
 
     <div class="d-flex justify-space-between align-center">
-      <h1>{{type.toUpperCase()}}</h1>
+      <h1>{{$t(type).toUpperCase()}}</h1>
       <v-btn
         class="d-flex d-sm-none"
         @click="$store.commit('setState', {type: 'overlayFilter', data: true})"
-      >Filters</v-btn>
+      >{{$t("filters").toUpperCase()}}</v-btn>
     </div>
     <v-row no-gutters>
       <v-col cols="12" sm="8">
@@ -21,7 +21,7 @@
               v-for="(item, i) in list"
               :key="i"
             >
-              <router-link :to="'/offer/' + type + '/' + item.id">
+              <nuxt-link :to="localePath({ name: 'offer-' + type + '-id', params: { id: item.id } })">
                 <v-img
                   :aspect-ratio="16/9"
                   class="d-flex align-end"
@@ -34,13 +34,13 @@
                   >
                     <div class="flex-grow-1 d-flex flex-wrap align-center justify-space-around">
                       <h2>{{item.name.toUpperCase()}}</h2>
-                      <div class="mx-4">from ${{item.cost}}</div>
-                      <v-btn small class="my-2 success flex-grow-1" @click.prevent="$store.commit('setState', {type: 'overlayListings', data: true}); book = {id: item.id, type: type}">Reserve</v-btn>
+                      <div class="mx-4">{{$t("from")}} ${{item.cost}}</div>
+                      <v-btn small class="my-2 success flex-grow-1" @click.prevent="$store.commit('setState', {type: 'overlayListings', data: true}); book = {id: item.id, type: type}">{{$t("reserve")}}</v-btn>
                     </div>
                     
                   </v-card>
                 </v-img>
-              </router-link>
+              </nuxt-link>
             </v-card>
           </div>
         </div>
@@ -121,3 +121,28 @@ export default {
 
 <style>
 </style>
+
+<i18n>
+{
+  "ru": {
+    "tours": "туры",
+    "featured": "признакам",
+    "excursions": "экскурсии",
+    "contact": "контакт",
+    "about": "около",
+    "transfers": "трансфер",
+    "partners": "партнеры",
+    "tour type": "тур тип",
+    "type": "тип",
+    "from": "из",
+    "spring": "весна",
+    "summer": "летом",
+    "fall": "осень",
+    "winter": "зима",
+    "more info": "больше информации",
+    "reserve": "zabronirovat'",
+    "seasons": "сезоны",
+    "filters": "фильтры"
+  }
+}
+</i18n>

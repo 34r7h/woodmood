@@ -53,6 +53,12 @@ export default {
         { text: "Cost", value: "cost" }
       ]
     };
-  }
+  },
+  // nuxtI18n: {
+  //   paths: {
+  //     en: '/transfers',
+  //     ru: '/трансфер'
+  //   }
+  // }
 };
 </script>

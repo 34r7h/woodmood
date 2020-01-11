@@ -6,6 +6,12 @@
 <script>
 import About from '../components/About'
 export default {
-  components:{About}
+  components:{About},
+  // nuxtI18n: {
+  //   paths: {
+  //     en: "/about",
+  //     ru: "/около"
+  //   }
+  // }
 }
 </script>

@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex flex-column" style="width: 100%">
-    <h2>Filters</h2>
+    <h2>{{$t('filters')}}</h2>
     <br />
     <v-btn class="secondary"
       @click="updateFilters(); $store.commit('setState', {type: 'overlayFilter', data: false})"
-    >Apply</v-btn>
+    >{{$t('apply')}}</v-btn>
     <v-form ref="form" v-model="valid">
-      <v-text-field v-model="copy.search" label="Search text" single-line type="text"></v-text-field>
-      <label>Filter cost</label>
+      <v-text-field v-model="copy.search" :label="$t('search text')" single-line type="text"></v-text-field>
+      <label>{{$t("filter cost")}}</label>
       <v-range-slider v-model="copy.cost" :max="500" :min="0" hide-details class="align-center">
         <template v-slot:prepend>
           <v-text-field
@@ -33,17 +33,17 @@
         </template>
       </v-range-slider>
 
-      <v-text-field v-model="copy.location" label="Location" single-line type="text"></v-text-field>
-      <v-text-field v-model="copy.type" label="Search type" single-line type="text"></v-text-field>
+      <v-text-field v-model="copy.location" :label="$t('location')" single-line type="text"></v-text-field>
+      <v-text-field v-model="copy.type" :label="$t('search type')" single-line type="text"></v-text-field>
       <v-select
         v-model="copy.seasons"
-        :items="['spring', 'summer', 'fall', 'winter' ]"
-        label="Select Seasons"
+        :items="[$t('spring'), $t('summer'), $t('fall'), $t('winter') ]"
+        :label="$t('select seasons')"
         multiple
       >
         <template v-slot:selection="{ item, index }">
           <v-chip>
-            <span>{{ item }}</span>
+            <span>{{ $t(item) }}</span>
           </v-chip>
         </template>
       </v-select>
@@ -87,3 +87,34 @@ export default {
   }
 };
 </script>
+
+<i18n>
+{
+  "ru": {
+    "tours": "туры",
+    "featured": "признакам",
+    "excursions": "экскурсии",
+    "contact": "контакт",
+    "about": "около",
+    "transfers": "трансфер",
+    "partners": "партнеры",
+    "tour type": "тур тип",
+    "type": "тип",
+    "from": "из",
+    "spring": "весна",
+    "summer": "летом",
+    "fall": "осень",
+    "winter": "зима",
+    "more info": "больше информации",
+    "reserve": "zabronirovat'",
+    "seasons": "сезоны",
+    "filters": "фильтры",
+    "apply": "применять",
+    "search text": "поиск текста",
+    "filter cost": "стоимость фильтра",
+    "location": "расположение",
+    "search type": "тип поиска",
+    "select seasons": "выберите сезоны"
+  }
+}
+</i18n>

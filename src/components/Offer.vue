@@ -11,12 +11,12 @@
               </div>
               <v-spacer />
               <v-card-actions class="d-flex flex-grow-1">
-                <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
+                <v-btn @click="overlays()" class="flex-grow-1 success" x-large>{{$t("reserve").toUpperCase()}}</v-btn>
               </v-card-actions>
             </v-card>
             <v-img :src="$store.state[type][id].image"></v-img>
             <v-card-subtitle class="d-flex justify-space-between align-center pa-0 px-4">
-              Seasons:
+              {{$t("seasons").toUpperCase()}}:
               <div
                 small
                 class="label pa-0 ma-0"
@@ -24,20 +24,20 @@
                 :key="seasonIndex"
               >
                 <v-icon class="accent--text" small>mdi-{{$store.state.icons[season]}}</v-icon>
-                {{season}}
+                {{$t(season)}}
               </div>
             </v-card-subtitle>
             <v-card-subtitle class="primary--text pa-4 pb-0">
               <h2>{{$store.state[type][id].location}} - {{$store.state[type][id].name}}</h2>
             </v-card-subtitle>
 
-            <v-card-subtitle>Type: {{$store.state[type][id].type}}</v-card-subtitle>
+            <v-card-subtitle>{{$t("type").toUpperCase()}}: {{$t($store.state[type][id].type).toUpperCase()}} </v-card-subtitle>
 
             <v-card-text>
               <vue-simple-markdown :source="$store.state[type][id].details"></vue-simple-markdown>
             </v-card-text>
             <v-card-actions>
-              <v-btn width="200px" @click="overlays()" class="success x-large" x-large>Reserve</v-btn>
+              <v-btn width="200px" @click="overlays()" class="success x-large" x-large>{{$t("reserve")}}</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -47,11 +47,11 @@
               <v-card-title class="pa-0 px-2">{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
               <v-card-subtitle
                 class="pa-2"
-              >{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
+              >{{$store.state[type][id].location}} {{$t("from")}} ${{$store.state[type][id].cost}}</v-card-subtitle>
             </div>
             <v-spacer />
             <v-card-actions class="d-flex flex-grow-1">
-              <v-btn @click="overlays()" class="flex-grow-1 success" x-large>Reserve</v-btn>
+              <v-btn @click="overlays()" class="flex-grow-1 success" x-large>{{$t("reserve")}}</v-btn>
             </v-card-actions>
           </v-card>
           <v-card flat class="pa-1">
@@ -93,3 +93,26 @@ export default {
   props: ["type", "id"]
 };
 </script>
+<i18n>
+{
+  "ru": {
+    "tours": "туры",
+    "featured": "признакам",
+    "excursions": "экскурсии",
+    "contact": "контакт",
+    "about": "около",
+    "transfers": "трансфер",
+    "partners": "партнеры",
+    "tour type": "тур тип",
+    "type": "тип",
+    "from": "из",
+    "spring": "весна",
+    "summer": "летом",
+    "fall": "осень",
+    "winter": "зима",
+    "more info": "больше информации",
+    "reserve": "zabronirovat'",
+    "seasons": "сезоны"
+  }
+}
+</i18n>
