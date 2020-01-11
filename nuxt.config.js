@@ -128,8 +128,16 @@ module.exports = {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
       themes: {
+        dark: {
+          primary: '#98261E',
+          accent: '#C04C28',
+          secondary: '#031C6A',
+          info: '#F7C732',
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: '#326727'
+        },
         light: {
           primary: '#98261E',
           accent: '#C04C28',

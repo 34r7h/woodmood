@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title>
         <router-link to="/">{{title}}</router-link>
@@ -8,8 +8,14 @@
       <div class="d-none d-sm-flex">
         <contact />
       </div>
-      <nuxt-link :to="switchLocalePath('ru')">🇷🇺</nuxt-link>/
-      <nuxt-link :to="switchLocalePath('en')">🇬🇧</nuxt-link>
+      <nuxt-link
+        :to="$route.name.indexOf('___en') > -1 ? switchLocalePath('ru') : switchLocalePath('en')"
+      >
+        <v-btn text small  class="d-flex justify-space-between px-3">
+          <i :style="'' + $route.name.indexOf('___ru') > -1 ? 'font-size: 200%;' : ''">🇷🇺</i>
+          <i :style="'' + $route.name.indexOf('___en') > -1 ? 'font-size: 200%;' : ''">🇬🇧</i>
+        </v-btn>
+      </nuxt-link>
       <v-btn class="d-flex d-sm-none" icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -97,3 +103,75 @@ router-link {
   text-decoration: none;
 }
 </style>
+<i18n>
+{
+  "ru": {
+    "tours": "туры",
+    "featured": "признакам",
+    "excursions": "экскурсии",
+    "contact": "контакт",
+    "about": "около",
+    "transfers": "трансфер",
+    "partners": "партнеры",
+    "tour type": "тур тип",
+    "type": "тип",
+    "from": "из",
+    "to": "в",
+    "spring": "весна",
+    "summer": "летом",
+    "fall": "осень",
+    "winter": "зима",
+    "more info": "больше информации",
+    "reserve": "zabronirovat'",
+    "seasons": "сезоны",
+    "filters": "фильтры",
+    "search transfers": "поисковые переводы",
+    "cost": "цена",
+    "request to book": "запрос на книгу",
+    "name": "имя",
+    "email": "Эл. адрес",
+    "phone": "Телефон",
+    "number of people": "число людей",
+    "date": "Дата",
+    "send request": "послать запрос",
+    "people": "люди",
+    "close": "blizko",
+    "Thank you": "Спасибо",
+    "We will contact you": "мы свяжемся с вами"
+  },
+  "en": {
+    "tours": "tours",
+    "featured": "featured",
+    "excursions": "excursions",
+    "contact": "contact",
+    "about": "about",
+    "transfers": "transfers",
+    "partners": "partners",
+    "tour type": "tour type",
+    "type": "type",
+    "from": "from",
+    "to": "to",
+    "spring": "spring",
+    "summer": "summer",
+    "fall": "fall",
+    "winter": "winter",
+    "more info": "more info",
+    "reserve": "reserve",
+    "seasons": "seasons",
+    "filters": "filters",
+    "search transfers": "search transfers",
+    "cost": "cost",
+    "request to book": "request to book",
+    "name": "name",
+    "email": "email",
+    "phone": "phone",
+    "number of people": "number of people",
+    "date": "date",
+    "send request": "send request",
+    "people": "people",
+    "close": "close",
+    "Thank you": "Thank yo",
+    "We will contact you": "We will contact you"
+  }
+}
+</i18n>

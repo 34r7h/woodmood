@@ -1,7 +1,6 @@
 <template>
   <div v-if="!requestSent">
-    <v-card-title class="px-0">Request to book {{item.name}}</v-card-title>
-    <v-card-subtitle class="px-0">We need a little information to make a quote</v-card-subtitle>
+    <v-card-title class="px-0">{{$t("request to book")}} {{item.name}}</v-card-title>
     <v-form ref="form">
       <v-date-picker
         v-if="chooseDate"
@@ -14,7 +13,7 @@
         v-if="!chooseDate"
         dense
         v-model="bookingDetails.name"
-        label="Your Name"
+        :label="$t('name')"
         single-line
         type="text"
       ></v-text-field>
@@ -22,7 +21,7 @@
         v-if="!chooseDate"
         dense
         v-model="bookingDetails.email"
-        label="Email Address"
+        :label="$t('email')"
         single-line
         type="email"
       ></v-text-field>
@@ -30,7 +29,7 @@
         v-if="!chooseDate"
         dense
         v-model="bookingDetails.phone"
-        label="Phone Number"
+        :label="$t('phone')"
         single-line
         type="text"
       ></v-text-field>
@@ -39,7 +38,7 @@
           v-if="!chooseDate"
           dense
           v-model="bookingDetails.number"
-          label="Number of People"
+          :label="$t('number of people')"
           single-line
           type="number"
         ></v-text-field>
@@ -49,25 +48,25 @@
           v-if="!chooseDate"
           class
           @click="chooseDate = true"
-        >{{bookingDetails.date || 'Choose Date'}}</v-btn>
+        >{{bookingDetails.date || $t('date')}}</v-btn>
       </div>
       <v-btn :disabled="!bookingDetails.email || bookingDetails.email.indexOf('@') < 0 || bookingDetails.email.indexOf('.') < 0  " @click="sendRequest()" width="100%" x-large class="success">
-        <b>Send Request</b>
+        <b>{{$t("send request")}}</b>
       </v-btn>
     </v-form>
   </div>
   <div v-else>
     <div v-if="requestSent">
-      <v-card-title>Thank you, we'll be in touch.</v-card-title>
-      <v-card-subtitle>Please check the submitted info. If there's a mistake, send the request again or contact us.</v-card-subtitle>
+      <v-card-title>{{$t("Thank you")}}</v-card-title>
+      <v-card-subtitle>{{$t("We will contact you")}}</v-card-subtitle>
       <v-card-text>
-          <div>Name: {{bookingDetails.name}}</div>
-          <div>Email: {{bookingDetails.email}}</div>
-          <div>Phone: {{bookingDetails.phone}}</div>
-          <div>People: {{bookingDetails.number}}</div>
-          <div>Date: {{bookingDetails.date}}</div>
+          <div>{{$t("name")}}: {{bookingDetails.name}}</div>
+          <div>{{$t("email")}}: {{bookingDetails.email}}</div>
+          <div>{{$t('phone')}}: {{bookingDetails.phone}}</div>
+          <div>{{$t("people")}}: {{bookingDetails.number}}</div>
+          <div>{{$t("date")}}: {{bookingDetails.date}}</div>
       </v-card-text>
-      <v-btn width="100%" @click="close" class="secondary">Tap to close</v-btn>
+      <v-btn width="100%" @click="close" class="secondary">{{$t("close")}}</v-btn>
     </div>
   </div>
 </template>
@@ -111,3 +110,76 @@ export default {
   props: ["item", 'id', 'type']
 };
 </script>
+
+<i18n>
+{
+  "ru": {
+    "tours": "туры",
+    "featured": "признакам",
+    "excursions": "экскурсии",
+    "contact": "контакт",
+    "about": "около",
+    "transfers": "трансфер",
+    "partners": "партнеры",
+    "tour type": "тур тип",
+    "type": "тип",
+    "from": "из",
+    "to": "в",
+    "spring": "весна",
+    "summer": "летом",
+    "fall": "осень",
+    "winter": "зима",
+    "more info": "больше информации",
+    "reserve": "zabronirovat'",
+    "seasons": "сезоны",
+    "filters": "фильтры",
+    "search transfers": "поисковые переводы",
+    "cost": "цена",
+    "request to book": "запрос на книгу",
+    "name": "имя",
+    "email": "Эл. адрес",
+    "phone": "Телефон",
+    "number of people": "число людей",
+    "date": "Дата",
+    "send request": "послать запрос",
+    "people": "люди",
+    "close": "blizko",
+    "Thank you": "Спасибо",
+    "We will contact you": "мы свяжемся с вами"
+  },
+  "en": {
+    "tours": "tours",
+    "featured": "featured",
+    "excursions": "excursions",
+    "contact": "contact",
+    "about": "about",
+    "transfers": "transfers",
+    "partners": "partners",
+    "tour type": "tour type",
+    "type": "type",
+    "from": "from",
+    "to": "to",
+    "spring": "spring",
+    "summer": "summer",
+    "fall": "fall",
+    "winter": "winter",
+    "more info": "more info",
+    "reserve": "reserve",
+    "seasons": "seasons",
+    "filters": "filters",
+    "search transfers": "search transfers",
+    "cost": "cost",
+    "request to book": "request to book",
+    "name": "name",
+    "email": "email",
+    "phone": "phone",
+    "number of people": "number of people",
+    "date": "date",
+    "send request": "send request",
+    "people": "people",
+    "close": "close",
+    "Thank you": "Thank yo",
+    "We will contact you": "We will contact you"
+  }
+}
+</i18n>

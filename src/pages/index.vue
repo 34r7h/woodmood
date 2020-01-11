@@ -3,7 +3,7 @@
     <v-flex xs12 sm8 md6>
       <featured/>
       <br>
-      <about/>
+      <about dark/>
     </v-flex>
   </v-layout>
 </template>

@@ -68,7 +68,7 @@
       <v-card light class="ma-2 pa-4">
         <v-btn text small @click="$store.commit('setState', {type: 'overlayFeatured',
         data: false}); book = {}">
-          <v-icon small>mdi-close</v-icon>Close
+          <v-icon small>mdi-close</v-icon>{{$t("close")}}
         </v-btn>
         <booking v-if="book.type && book.id" :type="book.type" :item="$store.state[book.type][book.id]" />
       </v-card>
@@ -126,6 +126,40 @@ export default {
     "winter": "зима",
     "more info": "больше информации",
     "reserve": "zabronirovat'"
+  },
+  "en": {
+    "tours": "tours",
+    "featured": "featured",
+    "excursions": "excursions",
+    "contact": "contact",
+    "about": "about",
+    "transfers": "transfers",
+    "partners": "partners",
+    "tour type": "tour type",
+    "type": "type",
+    "from": "from",
+    "to": "to",
+    "spring": "spring",
+    "summer": "summer",
+    "fall": "fall",
+    "winter": "winter",
+    "more info": "more info",
+    "reserve": "reserve",
+    "seasons": "seasons",
+    "filters": "filters",
+    "search transfers": "search transfers",
+    "cost": "cost",
+    "request to book": "request to book",
+    "name": "name",
+    "email": "email",
+    "phone": "phone",
+    "number of people": "number of people",
+    "date": "date",
+    "send request": "send request",
+    "people": "people",
+    "close": "close",
+    "Thank you": "Thank yo",
+    "We will contact you": "We will contact you"
   }
 }
 </i18n>

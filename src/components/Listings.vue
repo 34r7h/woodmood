@@ -1,6 +1,5 @@
 <template>
   <v-container v-if="$store.state[type]" fluid class="grey lighten-5">
-
     <div class="d-flex justify-space-between align-center">
       <h1>{{$t(type).toUpperCase()}}</h1>
       <v-btn
@@ -21,7 +20,9 @@
               v-for="(item, i) in list"
               :key="i"
             >
-              <nuxt-link :to="localePath({ name: 'offer-' + type + '-id', params: { id: item.id } })">
+              <nuxt-link
+                :to="localePath({ name: 'offer-' + type + '-id', params: { id: item.id } })"
+              >
                 <v-img
                   :aspect-ratio="16/9"
                   class="d-flex align-end"
@@ -35,9 +36,12 @@
                     <div class="flex-grow-1 d-flex flex-wrap align-center justify-space-around">
                       <h2>{{item.name.toUpperCase()}}</h2>
                       <div class="mx-4">{{$t("from")}} ${{item.cost}}</div>
-                      <v-btn small class="my-2 success flex-grow-1" @click.prevent="$store.commit('setState', {type: 'overlayListings', data: true}); book = {id: item.id, type: type}">{{$t("reserve")}}</v-btn>
+                      <v-btn
+                        small
+                        class="my-2 success flex-grow-1"
+                        @click.prevent="$store.commit('setState', {type: 'overlayListings', data: true}); book = {id: item.id, type: type}"
+                      >{{$t("reserve")}}</v-btn>
                     </div>
-                    
                   </v-card>
                 </v-img>
               </nuxt-link>
@@ -54,17 +58,25 @@
     <v-overlay :value="$store.state.overlayFilter">
       <v-card light class="ma-2 pa-4">
         <v-btn x-small @click="$store.commit('setState', {type: 'overlayFilter', data: false})">
-          <v-icon small>mdi-close</v-icon>Close
+          <v-icon small>mdi-close</v-icon>{{$t("close")}}
         </v-btn>
         <filters style="width: 100%" :type="type" />
       </v-card>
     </v-overlay>
     <v-overlay :value="$store.state.overlayListings">
       <v-card light class="ma-2 pa-4">
-        <v-btn text small @click="$store.commit('setState', {type: 'overlayListings', data: false}); book = {}">
-          <v-icon small>mdi-close</v-icon>Close
+        <v-btn
+          text
+          small
+          @click="$store.commit('setState', {type: 'overlayListings', data: false}); book = {}"
+        >
+          <v-icon small>mdi-close</v-icon>{{$t("close")}}
         </v-btn>
-        <booking v-if="book.type && book.id" :type="book.type" :item="$store.state[book.type][book.id]" />
+        <booking
+          v-if="book.type && book.id"
+          :type="book.type"
+          :item="$store.state[book.type][book.id]"
+        />
       </v-card>
     </v-overlay>
   </v-container>
@@ -74,7 +86,6 @@
 import _ from "lodash";
 import Filters from "./Filters";
 import Booking from "./Booking";
-
 
 export default {
   components: { Filters, Booking },
@@ -142,7 +153,42 @@ export default {
     "more info": "больше информации",
     "reserve": "zabronirovat'",
     "seasons": "сезоны",
-    "filters": "фильтры"
+    "filters": "фильтры",
+    "close": "blizko"
+  },
+  "en": {
+    "tours": "tours",
+    "featured": "featured",
+    "excursions": "excursions",
+    "contact": "contact",
+    "about": "about",
+    "transfers": "transfers",
+    "partners": "partners",
+    "tour type": "tour type",
+    "type": "type",
+    "from": "from",
+    "to": "to",
+    "spring": "spring",
+    "summer": "summer",
+    "fall": "fall",
+    "winter": "winter",
+    "more info": "more info",
+    "reserve": "reserve",
+    "seasons": "seasons",
+    "filters": "filters",
+    "search transfers": "search transfers",
+    "cost": "cost",
+    "request to book": "request to book",
+    "name": "name",
+    "email": "email",
+    "phone": "phone",
+    "number of people": "number of people",
+    "date": "date",
+    "send request": "send request",
+    "people": "people",
+    "close": "close",
+    "Thank you": "Thank yo",
+    "We will contact you": "We will contact you"
   }
 }
 </i18n>
