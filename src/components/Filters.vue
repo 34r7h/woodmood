@@ -100,7 +100,7 @@ export default {
     "partners": "партнеры",
     "tour type": "тур тип",
     "type": "тип",
-    "from": "из",
+    "from": "от",
     "spring": "весна",
     "summer": "летом",
     "fall": "осень",

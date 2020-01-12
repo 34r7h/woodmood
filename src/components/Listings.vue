@@ -34,7 +34,7 @@
                     class="d-flex flex-wrap ma-2 px-2 flex-shrink-1 justify-space-between align-center"
                   >
                     <div class="flex-grow-1 d-flex flex-wrap align-center justify-space-around">
-                      <h2>{{item.name.toUpperCase()}}</h2>
+                      <h2>{{($store.state.lang === 'en' ? item.name : item.ru.name || item.name).toUpperCase()}}</h2>
                       <div class="mx-4">{{$t("from")}} ${{item.cost}}</div>
                       <v-btn
                         small
@@ -95,18 +95,18 @@ export default {
         Object.values(this.$store.state[this.type]).filter((x, xKey) => {
           let toCheck = this.$store.state.filtered[this.type];
           return (
-            JSON.stringify(x)
+            JSON.stringify(this.$store.state.lang === 'en' ? x : x.ru || x)
               .toLowerCase()
               .indexOf(toCheck.search.toLowerCase()) > -1 &&
-            JSON.stringify(x.location)
+            JSON.stringify(this.$store.state.lang === 'en' ? x.location : x.ru.location || x.location)
               .toLowerCase()
               .indexOf(toCheck.location.toLowerCase()) > -1 &&
-            JSON.stringify(x.type)
+            JSON.stringify(this.$store.state.lang === 'en' ? x.type : x.ru.type || x.type )
               .toLowerCase()
               .indexOf(toCheck.type.toLowerCase()) > -1 &&
             (x.cost > toCheck.cost[0] && x.cost < toCheck.cost[1]) &&
             (toCheck.seasons.length === 0 ||
-              toCheck.seasons.some(r => x.season.includes(r)))
+              toCheck.seasons.some(r => x.season.includes(r) || x.ru.season.includes(r)))
           );
         }),
         this.sort
@@ -145,7 +145,7 @@ export default {
     "partners": "партнеры",
     "tour type": "тур тип",
     "type": "тип",
-    "from": "из",
+    "from": "от",
     "spring": "весна",
     "summer": "летом",
     "fall": "осень",

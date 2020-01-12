@@ -75,7 +75,7 @@ export default {
     "partners": "партнеры",
     "tour type": "тур тип",
     "type": "тип",
-    "from": "из",
+    "from": "от",
     "to": "в",
     "spring": "весна",
     "summer": "летом",

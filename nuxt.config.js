@@ -30,8 +30,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [ '~/plugins/ls.client.js' ],
   /*
   ** Nuxt.js dev-modules
   */
@@ -87,11 +86,11 @@ module.exports = {
         },
         'offer/tours/_id/index': {
           en: "/offer/tours/:id",
-          ru: "/predlozhenia/туры/:id"
+          ru: "/predlozhenia/tur/:id"
         },
         'offer/excursions/_id/index': {
           en: "/listings/excursions/:id",
-          ru: "/predlozhenia/экскурсии/:id"
+          ru: "/predlozhenia/ekskursiya/:id"
         },
         partners: {
           en: '/partners',

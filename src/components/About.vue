@@ -2,7 +2,7 @@
     <v-card flat>
         <v-card-text>
           <v-card-title>{{$t('about')}}</v-card-title>
-          <vue-simple-markdown class="pa-4" :source="$store.state.site.about"></vue-simple-markdown>
+          <vue-simple-markdown class="pa-4" :source="$store.state.site[$store.state.lang].about"></vue-simple-markdown>
         </v-card-text>
     </v-card>
 </template>
@@ -18,7 +18,7 @@
     "partners": "партнеры",
     "tour type": "тур тип",
     "type": "тип",
-    "from": "из",
+    "from": "от",
     "spring": "весна",
     "summer": "летом",
     "fall": "осень",

@@ -2,7 +2,7 @@
   <v-card flat>
     <v-card-text>
       <v-card-title>{{$t('partners')}}</v-card-title>
-      <vue-simple-markdown class="pa-4" :source="$store.state.site.partners"></vue-simple-markdown>
+      <vue-simple-markdown class="pa-4" :source="$store.state.site[$store.state.lang].partners"></vue-simple-markdown>
     </v-card-text>
   </v-card>
 </template>
@@ -28,7 +28,7 @@ export default {
     "partners": "партнеры",
     "tour type": "тур тип",
     "type": "тип",
-    "from": "из",
+    "from": "от",
     "to": "в",
     "spring": "весна",
     "summer": "летом",

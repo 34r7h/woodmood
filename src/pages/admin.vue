@@ -52,67 +52,72 @@
     </v-tabs>
     <v-card v-if="selected === 'site'">
       <v-card-title>Site Infomation</v-card-title>
-      <v-form class="d-flex flex-wrap pa-2">
-        <v-text-field
-          @input="save=true"
-          class="ma-1"
-          v-model="copy.site.name"
-          label="Site Name"
-          single-line
-          type="text"
-        ></v-text-field>
-        <v-textarea
-          @input="save=true"
-          class="ma-1"
-          label="About"
-          auto-grow
-          v-model="copy.site.about"
-        ></v-textarea>
-        <v-textarea
-          @input="save=true"
-          class="ma-1"
-          label="Partner Information"
-          auto-grow
-          v-model="copy.site.partners"
-        ></v-textarea>
-        <v-text-field
-          @input="save=true"
-          class="ma-1"
-          v-model="copy.site.fb"
-          label="Facebook Page"
-          single-line
-          type="url"
-        ></v-text-field>
-        <v-text-field
-          @input="save=true"
-          class="ma-1"
-          v-model="copy.site.insta"
-          label="Instagram Link"
-          single-line
-          type="url"
-        ></v-text-field>
-        <v-textarea
-          @input="save=true"
-          class="ma-1"
-          v-model="copy.site.contact"
-          label="Contact Info"
-        ></v-textarea>
-        <v-text-field
-          @input="save=true"
-          class="ma-1"
-          v-model="copy.site.phone"
-          label="Phone Number"
-          single-line
-          type="text"
-        ></v-text-field>
-        <v-text-field
-          @input="save=true"
-          class="ma-1"
-          v-model="copy.site.email"
-          label="Email Address"
-          single-line
-          type="email"
-        ></v-text-field>
+      <v-form :key="'site-' + lang" v-for="lang in ['en', 'ru']">
+        <div class="d-flex flex-wrap pa-2" v-if="$store.state.lang === lang">
+          <v-text-field
+            @input="save=true"
+            class="ma-1"
+            v-model="copy.site[lang].name"
+            label="Site Name"
+            single-line
+            type="text"
+          ></v-text-field>
+          <v-textarea
+            @input="save=true"
+            class="ma-1"
+            label="About"
+            auto-grow
+            style="min-width:220px;"
+            v-model="copy.site[lang].about"
+          ></v-textarea>
+          <v-textarea
+            @input="save=true"
+            class="ma-1"
+            label="Partner Information"
+            auto-grow
+            style="min-width:220px;"
+            v-model="copy.site[lang].partners"
+          ></v-textarea>
+          <v-text-field
+            @input="save=true"
+            class="ma-1"
+            v-model="copy.site[lang].fb"
+            label="Facebook Page"
+            single-line
+            type="url"
+          ></v-text-field>
+          <v-text-field
+            @input="save=true"
+            class="ma-1"
+            v-model="copy.site[lang].insta"
+            label="Instagram Link"
+            single-line
+            type="url"
+          ></v-text-field>
+          <v-textarea
+            @input="save=true"
+            class="ma-1"
+            style="min-width:220px;"
+            v-model="copy.site[lang].contact"
+            label="Contact Info"
+          ></v-textarea>
+          <v-text-field
+            @input="save=true"
+            class="ma-1"
+            v-model="copy.site[lang].phone"
+            label="Phone Number"
+            single-line
+            type="text"
+          ></v-text-field>
+          <v-text-field
+            @input="save=true"
+            class="ma-1"
+            v-model="copy.site[lang].email"
+            label="Email Address"
+            single-line
+            type="email"
+          ></v-text-field>
+        </div>
       </v-form>
     </v-card>
 
@@ -165,11 +170,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in copy[selected]" :key="item.id" v-if="item != null">
+          <tr v-for="item in (copy[selected])" :key="item.id" v-if="item != null">
             <td
               :style="`width: ${100/section.props.length}vw;`"
               v-for="(prop, propKey) in section.props"
               :key="propKey"
+              v-if="propKey !== 'ru'"
             >
               <div v-if="prop.type === 'image-url'">
                 <img :src="item[prop.name]" style="object-fit: cover; width:100%;" />
@@ -181,9 +187,17 @@
                 ></v-text-field>
               </div>
               <v-text-field
-                v-if="prop.type === 'text'"
+                v-if="prop.type === 'text' && $store.state.lang === 'en'"
                 @input="save = true"
+                style="min-width:110px;"
                 v-model="item[prop.name]"
+                type="text"
+              ></v-text-field>
+              <v-text-field
+                v-if="prop.type === 'text' && $store.state.lang === 'ru'"
+                @input="save = true"
+                style="min-width:110px;"
+                v-model="item.ru[prop.name]"
                 type="text"
               ></v-text-field>
               <v-text-field
@@ -191,12 +205,21 @@
                 @input="save = true"
                 v-model="item[prop.name]"
                 type="number"
+                style="min-width:55px;"
               ></v-text-field>
               <v-textarea
-                v-if="prop.type === 'textarea'"
+                style="min-width:220px;"
+                v-if="prop.type === 'textarea' && $store.state.lang === 'en'"
                 @input="save = true"
                 v-model="item[prop.name]"
               ></v-textarea>
+              <v-textarea
+                style="min-width:220px;"
+                v-if="prop.type === 'textarea' && $store.state.lang === 'ru'"
+                @input="save = true"
+                v-model="item.ru[prop.name]"
+              ></v-textarea>
+              
               <v-select
                 label="select"
                 v-if="prop.type === 'select'"
@@ -306,14 +329,23 @@ export default {
   },
   methods: {
     add(item) {
+      // item === 'tours'
       this.selected = item;
       let id = Date.now();
-      this.copy[this.selected][id] = { id };
+      this.copy[this.selected][id] = { id, ru: {} };
       this.selected = "";
       this.selected = item;
     },
-    clone(obj) {
-      return JSON.parse(JSON.stringify(obj));
+    clone(obj, name) {
+      let retObj = JSON.parse(JSON.stringify(obj));
+      // if (Object.keys(retObj).length > 0 && !name) {
+      //   Object.keys(retObj).forEach(key => {
+      //     console.log(key, retObj[key], retObj[key]['ru'])
+      //     retObj[key]['ru'] = retObj[key]['ru'] || retObj[key]
+      //     console.log(retObj[key]['ru'])
+      //   });
+      // }
+      return retObj;
     },
     remove(id, selected) {
       delete this.copy[this.selected][id];
@@ -328,13 +360,24 @@ export default {
       this.saved = true;
       setTimeout(() => {
         this.saved = false;
-      }, 2000);
+      }, 3000);
     }
+  },
+  mounted() {
+    window &&
+      window.localStorage.getItem("user") &&
+      this.$store.commit("setState", {
+        type: "user",
+        data: JSON.parse(window.localStorage.getItem("user"))
+      });
   }
 };
 </script>
 <style scoped>
 td {
   word-wrap: break-word;
+}
+.v-textarea textarea {
+  min-width: 220px !important;
 }
 </style>

@@ -6,8 +6,8 @@
           <v-card class="d-flex flex-column pa-2 mb-2">
             <v-card class="px-1 d-flex justify-space-between align-center flex-wrap mb-2 d-sm-none">
               <div class="d-flex flex-column justify-center">
-                <v-card-title>{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
-                <v-card-subtitle>{{$store.state[type][id].location}} from ${{$store.state[type][id].cost}}</v-card-subtitle>
+                <v-card-title>{{($store.state.lang === 'en' ? $store.state[type][id].name : $store.state[type][id].ru.name || $store.state[type][id].name).toUpperCase()}}</v-card-title>
+                <v-card-subtitle>{{$store.state.lang === 'en' ? $store.state[type][id].location : $store.state[type][id].ru.location || $store.state[type][id].location }} {{$t("from")}} ${{$store.state[type][id].cost}}</v-card-subtitle>
               </div>
               <v-spacer />
               <v-card-actions class="d-flex flex-grow-1">
@@ -28,13 +28,13 @@
               </div>
             </v-card-subtitle>
             <v-card-subtitle class="primary--text pa-4 pb-0">
-              <h2>{{$store.state[type][id].location}} - {{$store.state[type][id].name}}</h2>
+              <h2>{{$store.state.lang === 'en' ? $store.state[type][id].location : $store.state[type][id].ru.location || $store.state[type][id].location }} - {{$store.state.lang === 'en' ? $store.state[type][id].name : $store.state[type][id].ru.name || $store.state[type][id].name}}</h2>
             </v-card-subtitle>
 
             <v-card-subtitle>{{$t("type").toUpperCase()}}: {{$t($store.state[type][id].type).toUpperCase()}} </v-card-subtitle>
 
             <v-card-text>
-              <vue-simple-markdown :source="$store.state[type][id].details"></vue-simple-markdown>
+              <vue-simple-markdown :source="$store.state.lang === 'en' ? $store.state[type][id].details : $store.state[type][id].ru.details || $store.state[type][id].details"></vue-simple-markdown>
             </v-card-text>
             <v-card-actions>
               <v-btn width="200px" @click="overlays()" class="success x-large" x-large>{{$t("reserve")}}</v-btn>
@@ -44,10 +44,10 @@
         <v-col cols="12" sm="5" class="px-1">
           <v-card class="px-0 justify-space-between align-center flex-wrap mb-2 d-none d-sm-flex">
             <div class="d-flex flex-column justify-center">
-              <v-card-title class="pa-0 px-2">{{$store.state[type][id].name.toUpperCase()}}</v-card-title>
+              <v-card-title class="pa-0 px-2">{{($store.state.lang === 'en' ? $store.state[type][id].name : $store.state[type][id].ru.name || $store.state[type][id].name).toUpperCase()}}</v-card-title>
               <v-card-subtitle
                 class="pa-2"
-              >{{$store.state[type][id].location}} {{$t("from")}} ${{$store.state[type][id].cost}}</v-card-subtitle>
+              >{{$store.state.lang === 'en' ? $store.state[type][id].location : $store.state[type][id].ru.location || $store.state[type][id].location }} {{$t("from")}} ${{$store.state[type][id].cost}}</v-card-subtitle>
             </div>
             <v-spacer />
             <v-card-actions class="d-flex flex-grow-1">
@@ -105,7 +105,7 @@ export default {
     "partners": "партнеры",
     "tour type": "тур тип",
     "type": "тип",
-    "from": "из",
+    "from": "от",
     "spring": "весна",
     "summer": "летом",
     "fall": "осень",

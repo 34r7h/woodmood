@@ -1,10 +1,10 @@
 <template>
   <div class="d-flex align-center">
     <v-btn class="mx-0 secondary--text" icon>
-      <a class="mx-0 secondary--text" target="blank" :href="$store.state.site.fb"><v-icon>mdi-facebook</v-icon></a>
+      <a class="mx-0 secondary--text" target="blank" :href="$store.state.site[$store.state.lang].fb"><v-icon>mdi-facebook</v-icon></a>
     </v-btn>
     <v-btn class="mx-0 secondary--text" icon>
-      <a class="mx-0 secondary--text" target="blank" :href="$store.state.site.insta"><v-icon>mdi-instagram</v-icon></a>
+      <a class="mx-0 secondary--text" target="blank" :href="$store.state.site[$store.state.lang].insta"><v-icon>mdi-instagram</v-icon></a>
     </v-btn>
     <span class="mx-2 secondary--text">
       <router-link :to="localePath({ name: 'contact'})" ><v-btn small text class="secondary white--text">{{$t("contact")}}</v-btn></router-link>
@@ -23,7 +23,7 @@
     "partners": "партнеры",
     "tour type": "тур тип",
     "type": "тип",
-    "from": "из",
+    "from": "от",
     "to": "в",
     "spring": "весна",
     "summer": "летом",

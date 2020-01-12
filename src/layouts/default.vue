@@ -2,7 +2,7 @@
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title>
-        <router-link to="/">{{title}}</router-link>
+        <router-link to="/">{{$store.state.site[$store.state.lang].name || "🇬🇪 Tours 🇬🇪"}}</router-link>
       </v-toolbar-title>
       <v-spacer />
       <div class="d-none d-sm-flex">
@@ -11,9 +11,9 @@
       <nuxt-link
         :to="$route.name.indexOf('___en') > -1 ? switchLocalePath('ru') : switchLocalePath('en')"
       >
-        <v-btn text small  class="d-flex justify-space-between px-3">
-          <i :style="'' + $route.name.indexOf('___ru') > -1 ? 'font-size: 200%;' : ''">🇷🇺</i>
-          <i :style="'' + $route.name.indexOf('___en') > -1 ? 'font-size: 200%;' : ''">🇬🇧</i>
+        <v-btn @click="lang($route.name.includes('___ru') ? 'en' : 'ru')" text small  class="d-flex justify-space-between px-3">
+          <i class="mx-1" :style="'' + $route.name.indexOf('___ru') > -1 ? 'font-size: 200%;' : ''">🇷🇺</i>
+          <i class="mx-1" :style="'' + $route.name.indexOf('___en') > -1 ? 'font-size: 200%;' : ''">🇬🇧</i>
         </v-btn>
       </nuxt-link>
       <v-btn class="d-flex d-sm-none" icon @click.stop="rightDrawer = !rightDrawer">
@@ -58,8 +58,14 @@ export default {
   created() {
     this.$vuetify.theme.dark = false;
     // this.$vuetify.theme.dark = new Date().getHours() < 9 || new Date().getHours() > 21 ? true : false;
+    this.$route.name.includes('___ru') ? this.$store.commit('setState', {type: 'lang', data: 'ru'}) : this.$store.commit('setState', {type: 'lang', data: 'en'})
     this.$store.dispatch("get", this.$store.state);
     this.$store.dispatch("getSite", this.$store.state);
+  },
+  methods: {
+    lang(lang) {
+      return this.$store.commit('setState', {type: 'lang', data: lang}), lang
+    }
   },
   data() {
     return {
@@ -68,22 +74,9 @@ export default {
       dark: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: "mdi-apps",
-          title: "Welcome",
-          to: "/"
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire"
-        }
-      ],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
-      title: "🇬🇪 Tours 🇬🇪"
+      rightDrawer: false
     };
   }
 };
@@ -115,7 +108,7 @@ router-link {
     "partners": "партнеры",
     "tour type": "тур тип",
     "type": "тип",
-    "from": "из",
+    "from": "от",
     "to": "в",
     "spring": "весна",
     "summer": "летом",

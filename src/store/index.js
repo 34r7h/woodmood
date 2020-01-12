@@ -29,12 +29,9 @@ const state = () => ({
         }
     },
     transfers: {},
-    site: {},
+    site: {en: {}, ru: {}},
     user: null,
-    lang: {
-        en: {},
-        ru: {}
-    }
+    lang: 'en'
 
 })
 
@@ -47,14 +44,15 @@ const mutations = {
 const actions = {
     login({ commit }, user) {
         this.$fireAuth.signInWithEmailAndPassword(user.email, user.password).then((data) => {
-            console.log(data.user.uid)
             commit('setState', {type: 'user', data: data.user.uid})
+            window && window.localStorage.setItem('user', JSON.stringify(data))
         })
     },
     logout({ commit }) {
         console.log('logout')
         this.$fireAuth.signOut().then(() => {
             commit('setState', {type: 'user', data: null})
+            window && window.localStorage.removeItem('user')
         })
     },
     add(state) {
@@ -76,7 +74,8 @@ const actions = {
         ['tours', 'excursions', 'transfers'].map((type) => {
             const ref = this.$fireStore.collection('items').doc(type)
             ref.get().then((data) => {
-                data.exists ? commit('setState', { type, data: data.data() }) : null
+                data.exists && 
+                commit('setState', { type, data: data.data() })
             })
         })
     },
@@ -90,8 +89,8 @@ const actions = {
     getSite({ commit, state }) {
         const ref = this.$fireStore.collection('site').doc('v1')
         ref.get().then((data) => {
-
-            data.exists ? commit('setState', { type: 'site', data: data.data() }) : null
+            data.exists && 
+            commit('setState', { type: 'site', data: data.data() })
         })
     }
 }

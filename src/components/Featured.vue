@@ -10,7 +10,7 @@
         v-for="(item, itemIndex) in feature"
         :key="itemIndex"
       >
-        <v-card-title v-if="nodetails">{{item.name}}</v-card-title>
+        <v-card-title v-if="nodetails">{{$store.state.lang === 'en' ? item.name : item.ru.name || item.name}}</v-card-title>
         <v-img
             :aspect-ratio="16/9"
             v-if="nodetails"
@@ -34,12 +34,12 @@
             :class="nodetails ? 'align-center justify-space-between d-flex flex-wrap pa-0 mb-2' : 'flex-shrink-1'"
             style="width:100%; min-width: 180px; flex: 1"
           >
-            <v-card-title class="mb-4" v-if="!nodetails">{{item.name}}</v-card-title>
+            <v-card-title class="mb-4" v-if="!nodetails">{{$store.state.lang === 'en' ? item.name : item.ru.name || item.name}}</v-card-title>
             <v-card-subtitle
               style="width:100%;"
               class="d-flex align-center flex-wrap justify-space-between"
             >
-              <b class="primary--text">{{item.location}}</b>
+              <b class="primary--text">{{$store.state.lang === 'en' ? item.location : item.ru.location || item.location}}</b>
               <span v-for="(season, seasonIndex) in item.season" :key="seasonIndex">
                 <v-icon class=" accent--text" x-small>mdi-{{$store.state.icons[season]}}</v-icon>
                 {{$t(season)}}
@@ -47,7 +47,7 @@
             </v-card-subtitle>
             <v-card-subtitle class="px-4 py-0">{{$t("tour type")}}: {{item.type}}</v-card-subtitle>
             <v-card-text v-if="!nodetails">
-              <vue-simple-markdown :source="item.details.substring(0,280) + '...'"></vue-simple-markdown>
+              <vue-simple-markdown :source="($store.state.lang === 'en' ? item.details : item.ru.details || item.details).substring(0,280) + '...'"></vue-simple-markdown>
             </v-card-text>
             <v-card-title class>{{$t("from")}} ${{item.cost}}</v-card-title>
             <v-card-actions :class="nodetails ? 'pa-0' : 'pa-3'"  class=" d-flex justify-space-between" style="width:100%">
@@ -119,13 +119,30 @@ export default {
     "transfers": "трансфер",
     "partners": "партнеры",
     "tour type": "тур тип",
-    "from": "из",
+    "type": "тип",
+    "from": "от",
+    "to": "в",
     "spring": "весна",
     "summer": "летом",
     "fall": "осень",
     "winter": "зима",
     "more info": "больше информации",
-    "reserve": "zabronirovat'"
+    "reserve": "zabronirovat'",
+    "seasons": "сезоны",
+    "filters": "фильтры",
+    "search transfers": "поисковые переводы",
+    "cost": "цена",
+    "request to book": "запрос на книгу",
+    "name": "имя",
+    "email": "Эл. адрес",
+    "phone": "Телефон",
+    "number of people": "число людей",
+    "date": "Дата",
+    "send request": "послать запрос",
+    "people": "люди",
+    "close": "blizko",
+    "Thank you": "Спасибо",
+    "We will contact you": "мы свяжемся с вами"
   },
   "en": {
     "tours": "tours",
