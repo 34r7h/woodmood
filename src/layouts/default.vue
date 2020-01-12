@@ -2,7 +2,7 @@
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title>
-        <router-link to="/">{{$store.state.site[$store.state.lang].name || "🇬🇪 Tours 🇬🇪"}}</router-link>
+        <nuxt-link :to="'/' + $store.state.lang">{{$store.state.site[$store.state.lang].name || "🇬🇪 Tours 🇬🇪"}}</nuxt-link>
       </v-toolbar-title>
       <v-spacer />
       <div class="d-none d-sm-flex">

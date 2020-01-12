@@ -27,7 +27,7 @@
             :aspect-ratio="16/9"
             v-if="!nodetails"
             class="flex-grow-1 flex-shrink-1"
-            style="max-height: 400px; flex:2; width: 100%; min-height: 180px; min-width: 180px;"
+            style="flex:2; width: 100%; min-height: 180px; min-width: 180px;"
             :src="item.image"
           ></v-img>
           <div
@@ -50,14 +50,14 @@
               <vue-simple-markdown :source="($store.state.lang === 'en' ? item.details : item.ru.details || item.details).substring(0,280) + '...'"></vue-simple-markdown>
             </v-card-text>
             <v-card-title class>{{$t("from")}} ${{item.cost}}</v-card-title>
-            <v-card-actions :class="nodetails ? 'pa-0' : 'pa-3'"  class=" d-flex justify-space-between" style="width:100%">
+            <v-card-actions :class="nodetails ? 'pa-0' : 'pa-3'"  class=" d-flex justify-space-between flex-wrap" style="width:100%">
 
-              <nuxt-link :to="localePath({ name: 'offer-' + featureKey + '-id', params: { id: item.id } })" class="flex-grow-1 d-flex ma-1">
+              <nuxt-link :to="localePath({ name: 'offer-' + featureKey + '-id', params: { id: item.id } })" class="flex-grow-1 d-flex">
                 <v-btn class="secondary flex-grow-1 ma-1">{{$t("more info")}}</v-btn>
               </nuxt-link>
               <v-btn v-if="!nodetails"
                 @click="$store.commit('setState', {type: 'overlayFeatured', data: true}); book = {id: item.id, type: featureKey}"
-                class="success flex-grow-1"
+                class="success flex-grow-1 ma-1"
               >{{$t("reserve")}}</v-btn>
             </v-card-actions>
           </div>
