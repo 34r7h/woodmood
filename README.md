@@ -23,9 +23,10 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 
 ## TODO
-* Russian Translation
 * SEO / SSR
+* Chatbox
 
+* Russian Translation
 * Language flag size increase on select
 * Admin Auth
 * Booking button on listings

@@ -112,7 +112,7 @@ export default {
 {
   "ru": {
     "tours": "туры",
-    "featured": "признакам",
+    "featured": "избранные",
     "excursions": "экскурсии",
     "contact": "контакт",
     "about": "около",
